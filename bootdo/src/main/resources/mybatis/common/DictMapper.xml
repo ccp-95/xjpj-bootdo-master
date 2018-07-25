@@ -3,6 +3,8 @@
 
 <mapper namespace="com.bootdo.common.dao.DictDao">
 
+
+    
 	<select id="get" resultType="com.bootdo.common.domain.DictDO">
 		select
 		id,name,value,type,description,sort,parent_id,create_by,create_date,update_by,update_date,remarks,del_flag
@@ -10,6 +12,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.DictDO">
+	 <include refid="pagination.Oracle_Pagination_Head" />
 		select
 		id,name,value,type,description,sort,parent_id,create_by,create_date,update_by,update_date,remarks,del_flag
 		from sys_dict
@@ -36,9 +39,7 @@
 				order by id desc
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		 <include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 
 	<select id="count" resultType="int">

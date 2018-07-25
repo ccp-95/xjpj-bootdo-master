@@ -4,11 +4,12 @@
 <mapper namespace="${package}.dao.${className}Dao">
 
 	<select id="get" resultType="${package}.domain.${className}DO">
-		select #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end from ${tableName} where ${pk.columnName} = #{value}
+		select #foreach($column in $columns)$column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName} where ${pk.columnName} = #{value}
 	</select>
 
 	<select id="list" resultType="${package}.domain.${className}DO">
-		select #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end from ${tableName}
+	    <include refid="pagination.Oracle_Pagination_Head" />
+		select #foreach($column in $columns) $column.columnName #if($velocityCount != $columns.size()),#end#end from ${tableName}
         <where>  
 		  #foreach($column in $columns)
 		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
@@ -22,9 +23,7 @@
                 order by ${pk.columnName} desc
 			</otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 	
  	<select id="count" resultType="int">
@@ -41,7 +40,7 @@
 		(
 #foreach($column in $columns)
 #if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			`$column.columnName`#if($velocityCount != $columns.size()), #end
+			 $column.columnName #if($velocityCount != $columns.size()), #end
 
 #end			
 #end
@@ -62,7 +61,7 @@
 		<set>
 #foreach($column in $columns)
 #if($column.columnName != $pk.columnName)
-			<if test="$column.attrname != null">`$column.columnName` = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
+			<if test="$column.attrname != null"> $column.columnName  = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
 #end
 #end
 		</set>
