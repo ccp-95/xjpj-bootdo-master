@@ -9,6 +9,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.system.domain.RoleMenuDO">
+		<include refid="pagination.Oracle_Pagination_Head" />
 		select id,role_id,menu_id from sys_role_menu
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
@@ -23,9 +24,7 @@
 				order by id desc
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 
 	<select id="count" resultType="int">
@@ -37,8 +36,10 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.bootdo.system.domain.RoleMenuDO"
-		useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.system.domain.RoleMenuDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　	SELECT SEQ_SYS_ROLE_MENU.NEXTVAL FROM DUAL   
+   　　 </selectKey>
 		insert into sys_role_menu
 		(
 		role_id,

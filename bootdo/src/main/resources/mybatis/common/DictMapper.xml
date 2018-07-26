@@ -3,125 +3,109 @@
 
 <mapper namespace="com.bootdo.common.dao.DictDao">
 
-
-    
 	<select id="get" resultType="com.bootdo.common.domain.DictDO">
-		select
-		id,name,value,type,description,sort,parent_id,create_by,create_date,update_by,update_date,remarks,del_flag
-		from sys_dict where id = #{value}
+		select ID,NAME,VALUE,TYPE,DESCRIPTION,SORT,PARENT_ID,CREATE_BY,CREATE_DATE,UPDATE_BY,UPDATE_DATE,REMARKS,DEL_FLAG from SYS_DICT where ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.DictDO">
-	 <include refid="pagination.Oracle_Pagination_Head" />
-		select
-		id,name,value,type,description,sort,parent_id,create_by,create_date,update_by,update_date,remarks,del_flag
-		from sys_dict
-		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="value != null and value != ''"> and value = #{value} </if>
-			<if test="type != null and type != ''"> and type = #{type} </if>
-			<if test="description != null and description != ''"> and description = #{description} </if>
-			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
-			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
-			<if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
-			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
-			<if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
-			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
-			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
-			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
+	    <include refid="pagination.Oracle_Pagination_Head" />
+		select  ID , NAME , VALUE , TYPE , DESCRIPTION , SORT , PARENT_ID , CREATE_BY , CREATE_DATE , UPDATE_BY , UPDATE_DATE , REMARKS , DEL_FLAG  from SYS_DICT
+        <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="name != null and name != ''"> and NAME = #{name} </if>
+		  		  <if test="value != null and value != ''"> and VALUE = #{value} </if>
+		  		  <if test="type != null and type != ''"> and TYPE = #{type} </if>
+		  		  <if test="description != null and description != ''"> and DESCRIPTION = #{description} </if>
+		  		  <if test="sort != null and sort != ''"> and SORT = #{sort} </if>
+		  		  <if test="parentId != null and parentId != ''"> and PARENT_ID = #{parentId} </if>
+		  		  <if test="createBy != null and createBy != ''"> and CREATE_BY = #{createBy} </if>
+		  		  <if test="createDate != null and createDate != ''"> and CREATE_DATE = #{createDate} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and UPDATE_BY = #{updateBy} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and UPDATE_DATE = #{updateDate} </if>
+		  		  <if test="remarks != null and remarks != ''"> and REMARKS = #{remarks} </if>
+		  		  <if test="delFlag != null and delFlag != ''"> and DEL_FLAG = #{delFlag} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
 			<otherwise>
-				order by id desc
+                order by ID desc
 			</otherwise>
-		</choose>
-		 <include refid="pagination.Oracle_Pagination_Tail" />
+        </choose>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
-
-	<select id="count" resultType="int">
-		select count(*) from sys_dict
-		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="value != null and value != ''"> and value = #{value} </if>
-			<if test="type != null and type != ''"> and type = #{type} </if>
-			<if test="description != null and description != ''"> and description = #{description} </if>
-			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
-			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
-			<if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
-			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
-			<if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
-			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
-			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
-			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
-		</where>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from SYS_DICT
+		 <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="name != null and name != ''"> and NAME = #{name} </if>
+		  		  <if test="value != null and value != ''"> and VALUE = #{value} </if>
+		  		  <if test="type != null and type != ''"> and TYPE = #{type} </if>
+		  		  <if test="description != null and description != ''"> and DESCRIPTION = #{description} </if>
+		  		  <if test="sort != null and sort != ''"> and SORT = #{sort} </if>
+		  		  <if test="parentId != null and parentId != ''"> and PARENT_ID = #{parentId} </if>
+		  		  <if test="createBy != null and createBy != ''"> and CREATE_BY = #{createBy} </if>
+		  		  <if test="createDate != null and createDate != ''"> and CREATE_DATE = #{createDate} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and UPDATE_BY = #{updateBy} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and UPDATE_DATE = #{updateDate} </if>
+		  		  <if test="remarks != null and remarks != ''"> and REMARKS = #{remarks} </if>
+		  		  <if test="delFlag != null and delFlag != ''"> and DEL_FLAG = #{delFlag} </if>
+		  		</where>
 	</select>
-
-	<insert id="save" parameterType="com.bootdo.common.domain.DictDO"
-		useGeneratedKeys="true" keyProperty="id">
-		insert into sys_dict
+	 
+	<insert id="save" parameterType="com.bootdo.common.domain.DictDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+			SELECT SEQ_SYS_DICT.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into SYS_DICT
 		(
-		name,
-		value,
-		type,
-		description,
-		sort,
-		parent_id,
-		create_by,
-		create_date,
-		update_by,
-		update_date,
-		remarks,
-		del_flag
-		)
+			 ID , 			 NAME , 			 VALUE , 			 TYPE , 			 DESCRIPTION , 			 SORT , 			 PARENT_ID , 			 CREATE_BY , 			 CREATE_DATE , 			 UPDATE_BY , 			 UPDATE_DATE , 			 REMARKS , 			 DEL_FLAG 		)
 		values
 		(
-		#{name},
-		#{value},
-		#{type},
-		#{description},
-		#{sort},
-		#{parentId},
-		#{createBy},
-		#{createDate},
-		#{updateBy},
-		#{updateDate},
-		#{remarks},
-		#{delFlag}
+			#{id,jdbcType=NUMERIC}, 		
+			#{name,jdbcType=VARCHAR}, 		
+			#{value,jdbcType=VARCHAR}, 		
+			#{type,jdbcType=VARCHAR}, 		
+			#{description,jdbcType=VARCHAR}, 		
+			#{sort,jdbcType=NUMERIC}, 		
+			#{parentId,jdbcType=NUMERIC}, 		
+			#{createBy,jdbcType=NUMERIC}, 		
+			#{createDate,jdbcType=DATE}, 		
+			#{updateBy,jdbcType=NUMERIC}, 		
+			#{updateDate,jdbcType=DATE}, 		
+			#{remarks,jdbcType=VARCHAR}, 		
+			#{delFlag,jdbcType=NCHAR}		
 		)
 	</insert>
-
+	 
 	<update id="update" parameterType="com.bootdo.common.domain.DictDO">
-		update sys_dict
+		update SYS_DICT 
 		<set>
-			<if test="name != null">name = #{name}, </if>
-			<if test="value != null">value = #{value}, </if>
-			<if test="type != null">type = #{type}, </if>
-			<if test="description != null">description = #{description}, </if>
-			<if test="sort != null">sort = #{sort}, </if>
-			<if test="parentId != null">parent_id = #{parentId}, </if>
-			<if test="createBy != null">create_by = #{createBy}, </if>
-			<if test="createDate != null">create_date = #{createDate}, </if>
-			<if test="updateBy != null">update_by = #{updateBy}, </if>
-			<if test="updateDate != null">update_date = #{updateDate}, </if>
-			<if test="remarks != null">remarks = #{remarks}, </if>
-			<if test="delFlag != null">del_flag = #{delFlag}</if>
+			<if test="name != null"> NAME  = #{name}, </if>
+			<if test="value != null"> VALUE  = #{value}, </if>
+			<if test="type != null"> TYPE  = #{type}, </if>
+			<if test="description != null"> DESCRIPTION  = #{description}, </if>
+			<if test="sort != null"> SORT  = #{sort}, </if>
+			<if test="parentId != null"> PARENT_ID  = #{parentId}, </if>
+			<if test="createBy != null"> CREATE_BY  = #{createBy}, </if>
+			<if test="createDate != null"> CREATE_DATE  = #{createDate}, </if>
+			<if test="updateBy != null"> UPDATE_BY  = #{updateBy}, </if>
+			<if test="updateDate != null"> UPDATE_DATE  = #{updateDate}, </if>
+			<if test="remarks != null"> REMARKS  = #{remarks}, </if>
+			<if test="delFlag != null"> DEL_FLAG  = #{delFlag}</if>
 		</set>
-		where id = #{id}
+		where ID = #{id}
 	</update>
-
+	
 	<delete id="remove">
-		delete from sys_dict where id = #{value}
+		delete from SYS_DICT where ID = #{value}
 	</delete>
-
+	
 	<delete id="batchRemove">
-		delete from sys_dict where id in
-		<foreach item="id" collection="array" open="(" separator=","
-			close=")">
+		delete from SYS_DICT where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
 	</delete>
@@ -129,5 +113,4 @@
 	<select id="listType" resultType="com.bootdo.common.domain.DictDO">
 		select distinct type , description from sys_dict
 	</select>
-
 </mapper>

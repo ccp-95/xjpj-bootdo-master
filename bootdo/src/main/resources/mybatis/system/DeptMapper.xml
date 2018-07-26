@@ -10,6 +10,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.system.domain.DeptDO">
+		<include refid="pagination.Oracle_Pagination_Head" />
 		select dept_id,parent_id,name,order_num,del_flag from
 		sys_dept
 		<where>
@@ -27,9 +28,7 @@
 				order by dept_id desc
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 
 	<select id="count" resultType="int">
@@ -43,8 +42,10 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.bootdo.system.domain.DeptDO"
-		useGeneratedKeys="true" keyProperty="deptId">
+	<insert id="save" parameterType="com.bootdo.system.domain.DeptDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　	SELECT SEQ_SYS_DEPT.NEXTVAL FROM DUAL   
+   　　 </selectKey>
 		insert into sys_dept
 		(
 		parent_id,

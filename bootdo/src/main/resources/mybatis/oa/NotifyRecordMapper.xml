@@ -10,6 +10,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.oa.domain.NotifyRecordDO">
+		<include refid="pagination.Oracle_Pagination_Head" />
 		select id,notify_id,user_id,is_read,read_date from
 		oa_notify_record
 		<where>
@@ -27,9 +28,7 @@
 				order by id desc
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 
 	<select id="count" resultType="int">
@@ -43,8 +42,10 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.bootdo.oa.domain.NotifyRecordDO"
-		useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.oa.domain.NotifyRecordDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　	SELECT SEQ_OA_NOTIFY_RECORD.NEXTVAL FROM DUAL   
+   　　 </selectKey>
 		insert into oa_notify_record
 		(
 		notify_id,

@@ -81,6 +81,9 @@
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.activiti.domain.SalaryDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　	SELECT SEQ_SALARY.NEXTVAL FROM DUAL   
+   　　 </selectKey>
 		insert into salary
 		(
 			id, 

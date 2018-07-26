@@ -4,101 +4,109 @@
 <mapper namespace="com.bootdo.common.dao.LogDao">
 
 	<select id="get" resultType="com.bootdo.common.domain.LogDO">
-		select id,user_id,username,operation,time,method,params,ip,gmt_create from sys_log where id = #{value}
+		select ID,USER_ID,USERNAME,OPERATION,TIME,METHOD,PARAMS,IP,GMT_CREATE from SYS_LOG where ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.LogDO">
-		select id,user_id,username,operation,time,method,params,ip,gmt_create from sys_log
+	    <include refid="pagination.Oracle_Pagination_Head" />
+		select  ID , USER_ID , USERNAME , OPERATION , TIME , METHOD , PARAMS , IP , GMT_CREATE  from SYS_LOG
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="operation != null and operation != ''"> and operation = #{operation} </if>
-		  		  <if test="time != null and time != ''"> and time = #{time} </if>
-		  		  <if test="method != null and method != ''"> and method = #{method} </if>
-		  		  <if test="params != null and params != ''"> and params = #{params} </if>
-		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
-		  		  <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and USER_ID = #{userId} </if>
+		  		  <if test="username != null and username != ''"> and USERNAME = #{username} </if>
+		  		  <if test="operation != null and operation != ''"> and OPERATION = #{operation} </if>
+		  		  <if test="time != null and time != ''"> and TIME = #{time} </if>
+		  		  <if test="method != null and method != ''"> and METHOD = #{method} </if>
+		  		  <if test="params != null and params != ''"> and PARAMS = #{params} </if>
+		  		  <if test="ip != null and ip != ''"> and IP = #{ip} </if>
+		  		  <if test="gmtCreate != null and gmtCreate != ''"> and GMT_CREATE = #{gmtCreate} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by ID desc
 			</otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sys_log
+		select count(*) from SYS_LOG
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="operation != null and operation != ''"> and operation = #{operation} </if>
-		  		  <if test="time != null and time != ''"> and time = #{time} </if>
-		  		  <if test="method != null and method != ''"> and method = #{method} </if>
-		  		  <if test="params != null and params != ''"> and params = #{params} </if>
-		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
-		  		  <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and USER_ID = #{userId} </if>
+		  		  <if test="username != null and username != ''"> and USERNAME = #{username} </if>
+		  		  <if test="operation != null and operation != ''"> and OPERATION = #{operation} </if>
+		  		  <if test="time != null and time != ''"> and TIME = #{time} </if>
+		  		  <if test="method != null and method != ''"> and METHOD = #{method} </if>
+		  		  <if test="params != null and params != ''"> and PARAMS = #{params} </if>
+		  		  <if test="ip != null and ip != ''"> and IP = #{ip} </if>
+		  		  <if test="gmtCreate != null and gmtCreate != ''"> and GMT_CREATE = #{gmtCreate} </if>
 		  		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.common.domain.LogDO">
-	    <selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_SYS_LOG.NEXTVAL FROM DUAL   
-   　　 	</selectKey>  
-		insert into sys_log
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+			SELECT SEQ_SYS_LOG.NEXTVAL FROM DUAL   
+		</selectKey>
+		insert into SYS_LOG
 		(
-			id,
-			user_id, 
-			username, 
-			operation, 
-			time, 
-			method, 
-			params, 
-			ip, 
-			gmt_create
+
+			 ID , 			
+
+			 USER_ID , 			
+
+			 USERNAME , 			
+
+			 OPERATION , 			
+
+			 TIME , 			
+
+			 METHOD , 			
+
+			 PARAMS , 			
+
+			 IP , 			
+
+			 GMT_CREATE 			
 		)
 		values
 		(
-			#{id,jdbcType=NUMERIC},
-			#{userId,jdbcType=NUMERIC}, 
-			#{username,jdbcType=VARCHAR}, 
-			#{operation,jdbcType=VARCHAR}, 
-			#{time,jdbcType=NUMERIC}, 
-			#{method,jdbcType=VARCHAR}, 
-			#{params,jdbcType=NCLOB}, 
-			#{ip,jdbcType=VARCHAR}, 
-			#{gmtCreate,jdbcType=DATE}
+			#{id,jdbcType=NUMERIC}, 		
+			#{userId,jdbcType=NUMERIC}, 		
+			#{username,jdbcType=VARCHAR}, 		
+			#{operation,jdbcType=VARCHAR}, 		
+			#{time,jdbcType=NUMERIC}, 		
+			#{method,jdbcType=VARCHAR}, 		
+			#{params,jdbcType=NCLOB}, 		
+			#{ip,jdbcType=VARCHAR}, 		
+			#{gmtCreate,jdbcType=DATE}		
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.bootdo.common.domain.LogDO">
-		update sys_log 
+		update SYS_LOG 
 		<set>
-			<if test="userId != null">user_id = #{userId}, </if>
-			<if test="username != null">username = #{username}, </if>
-			<if test="operation != null">operation = #{operation}, </if>
-			<if test="time != null">time = #{time}, </if>
-			<if test="method != null">method = #{method}, </if>
-			<if test="params != null">params = #{params}, </if>
-			<if test="ip != null">ip = #{ip}, </if>
-			<if test="gmtCreate != null">gmt_create = #{gmtCreate}</if>
+			<if test="userId != null"> USER_ID  = #{userId}, </if>
+			<if test="username != null"> USERNAME  = #{username}, </if>
+			<if test="operation != null"> OPERATION  = #{operation}, </if>
+			<if test="time != null"> TIME  = #{time}, </if>
+			<if test="method != null"> METHOD  = #{method}, </if>
+			<if test="params != null"> PARAMS  = #{params}, </if>
+			<if test="ip != null"> IP  = #{ip}, </if>
+			<if test="gmtCreate != null"> GMT_CREATE  = #{gmtCreate}</if>
 		</set>
-		where id = #{id}
+		where ID = #{id}
 	</update>
 	
 	<delete id="remove">
-		delete from sys_log where id = #{value}
+		delete from SYS_LOG where ID = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from sys_log where id in 
+		delete from SYS_LOG where ID in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

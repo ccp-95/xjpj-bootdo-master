@@ -83,7 +83,7 @@ function batchCode() {
 	var tables = new Array();
 	// 遍历所有选择的行数据，取每条数据对应的ID
 	$.each(rows, function(i, row) {
-		tables[i] = row['tableName'];
+		tables[i] = row['TABLENAME'];
 	});
 	location.href = prefix + "/batchCode?tables=" + JSON.stringify(tables);
 }

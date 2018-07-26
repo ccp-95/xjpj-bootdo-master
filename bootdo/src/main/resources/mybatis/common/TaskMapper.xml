@@ -8,6 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.TaskDO">
+	    <include refid="pagination.Oracle_Pagination_Head" />
 		select id,cron_expression,method_name,is_concurrent,description,update_by,bean_class,create_date,job_status,job_group,update_date,create_by,spring_bean,job_name from sys_task
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -33,9 +34,7 @@
                 order by id desc
 			</otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 	
  	<select id="count" resultType="int">
@@ -58,38 +57,43 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.common.domain.TaskDO" useGeneratedKeys="true" keyProperty="id">
-		insert into sys_task
+	<insert id="save" parameterType="com.bootdo.common.domain.TaskDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　	SELECT SEQ_SYS_TASK.NEXTVAL FROM DUAL   
+   　　 </selectKey>
+		insert into SYS_TASK
 		(
-			cron_expression, 
-			method_name, 
-			is_concurrent, 
-			description, 
-			update_by, 
-			bean_class, 
-			create_date, 
-			job_status, 
-			job_group, 
-			update_date, 
-			create_by, 
-			spring_bean, 
-			job_name
+			ID, 
+			CRON_EXPRESSION, 
+			METHOD_NAME, 
+			IS_CONCURRENT, 
+			DESCRIPTION, 
+			UPDATE_BY, 
+			BEAN_CLASS, 
+			CREATE_DATE, 
+			JOB_STATUS, 
+			JOB_GROUP, 
+			UPDATE_DATE, 
+			CREATE_BY, 
+			SPRING_BEAN, 
+			JOB_NAME
 		)
 		values
 		(
-			#{cronExpression}, 
-			#{methodName}, 
-			#{isConcurrent}, 
-			#{description}, 
-			#{updateBy}, 
-			#{beanClass}, 
-			#{createDate}, 
-			#{jobStatus}, 
-			#{jobGroup}, 
-			#{updateDate}, 
-			#{createBy}, 
-			#{springBean}, 
-			#{jobName}
+			#{id,jdbcType=NUMERIC}, 		
+			#{cronExpression,jdbcType=VARCHAR}, 		
+			#{methodName,jdbcType=VARCHAR}, 		
+			#{isConcurrent,jdbcType=VARCHAR}, 		
+			#{description,jdbcType=VARCHAR}, 		
+			#{updateBy,jdbcType=VARCHAR}, 		
+			#{beanClass,jdbcType=VARCHAR}, 		
+			#{createDate,jdbcType=DATE}, 		
+			#{jobStatus,jdbcType=VARCHAR}, 		
+			#{jobGroup,jdbcType=VARCHAR}, 		
+			#{updateDate,jdbcType=DATE}, 		
+			#{createBy,jdbcType=VARCHAR}, 		
+			#{springBean,jdbcType=VARCHAR}, 		
+			#{jobName,jdbcType=VARCHAR}		
 		)
 	</insert>
 	 

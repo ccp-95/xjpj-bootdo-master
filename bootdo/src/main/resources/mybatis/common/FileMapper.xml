@@ -8,6 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.FileDO">
+		<include refid="pagination.Oracle_Pagination_Head" />
 		select id,type,url,create_date from sys_file
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -23,9 +24,7 @@
                 order by id desc
 			</otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 	
  	<select id="count" resultType="int">
@@ -38,18 +37,23 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.common.domain.FileDO" useGeneratedKeys="true" keyProperty="id">
-		insert into sys_file
+	<insert id="save" parameterType="com.bootdo.common.domain.FileDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　		SELECT SEQ_SYS_FILE.NEXTVAL FROM DUAL   
+   　　 	</selectKey>
+		insert into SYS_FILE
 		(
-			type, 
-			url, 
-			create_date
+			ID, 
+			TYPE, 
+			URL, 
+			CREATE_DATE
 		)
 		values
 		(
-			#{type}, 
-			#{url}, 
-			#{createDate}
+			#{id,jdbcType=NUMERIC}, 		
+			#{type,jdbcType=NUMERIC}, 		
+			#{url,jdbcType=VARCHAR}, 		
+			#{createDate,jdbcType=DATE}		
 		)
 	</insert>
 	 

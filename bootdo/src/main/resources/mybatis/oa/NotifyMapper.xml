@@ -58,8 +58,10 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.bootdo.oa.domain.NotifyDO"
-		useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.oa.domain.NotifyDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　	SELECT SEQ_OA_NOTIFY.NEXTVAL FROM DUAL   
+   　　 </selectKey>
 		insert into oa_notify
 		(
 		type,

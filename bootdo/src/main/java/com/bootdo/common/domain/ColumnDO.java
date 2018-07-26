@@ -1,5 +1,8 @@
 package com.bootdo.common.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 列的属性
  * 
@@ -10,6 +13,8 @@ public class ColumnDO {
 	private String columnName;
 	// 列名类型
 	private String dataType;
+	// JDBCType
+	private String jdbcType;
 	// 列名备注
 	private String comments;
 
@@ -22,6 +27,22 @@ public class ColumnDO {
 	// auto_increment
 	private String extra;
 
+	private static Map<String, String> typeMap = new HashMap<String, String>(){{
+		put("NUMBER","NUMERIC");
+		put("INTEGER","INTEGER");
+		put("FLOAT","FLOAT");
+		put("DECIMAL","DECIMAL");
+		put("DATE","DATE");
+		put("VARCHAR","VARCHAR");
+		put("VARCHAR2","VARCHAR");
+		put("NVARCHAR","VARCHAR");
+		put("NVARCHAR2","VARCHAR");
+		put("VARCHAR","VARCHAR");
+		put("NCLOB","NCLOB");
+		put("CLOB","CLOB");
+		put("BLOB","BLOB");
+		put("NCHAR","NCHAR");
+		}};;
 	public String getColumnName() {
 		return columnName;
 	}
@@ -36,6 +57,15 @@ public class ColumnDO {
 
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
+		setJdbcType(convertDataTypeToJdbcType(dataType));
+	}
+	
+	public String getJdbcType() {
+		return jdbcType;
+	}
+
+	public void setJdbcType(String jdbcType) {
+		this.jdbcType = jdbcType;
 	}
 
 	public String getComments() {
@@ -78,6 +108,15 @@ public class ColumnDO {
 		this.extra = extra;
 	}
 
+	private String convertDataTypeToJdbcType(String dataType){
+		String jdbcType = typeMap.get(dataType);
+		if (jdbcType != null) {
+			return jdbcType;
+		}
+		else {
+			return "unknowType";
+		}
+	}
 	@Override
 	public String toString() {
 		return "ColumnDO{" +

@@ -10,6 +10,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.system.domain.MenuDO">
+		<include refid="pagination.Oracle_Pagination_Head" />
 		select
 		menu_id,parent_id,name,url,perms,type,icon,order_num,gmt_create,gmt_modified
 		from sys_menu
@@ -33,9 +34,7 @@
 				order by menu_id desc
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 
 	<select id="count" resultType="int">
@@ -54,8 +53,10 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.bootdo.system.domain.MenuDO"
-		useGeneratedKeys="true" keyProperty="menuId">
+	<insert id="save" parameterType="com.bootdo.system.domain.MenuDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+   　　　　	SELECT SEQ_SYS_MENU.NEXTVAL FROM DUAL   
+   　　 </selectKey>
 		insert into sys_menu
 		(
 		parent_id,
