@@ -38,17 +38,19 @@
 
 	<insert id="save" parameterType="com.bootdo.system.domain.UserRoleDO">
 		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_SYS_USER_ROLE.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into sys_user_role
+			SELECT SEQ_SYS_USER_ROLE.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into SYS_USER_ROLE
 		(
-		user_id,
-		role_id
+			ID, 
+			USER_ID, 
+			ROLE_ID
 		)
 		values
 		(
-		#{userId},
-		#{roleId}
+			#{id,jdbcType=NUMERIC}, 		
+			#{userId,jdbcType=NUMERIC}, 		
+			#{roleId,jdbcType=NUMERIC}		
 		)
 	</insert>
 

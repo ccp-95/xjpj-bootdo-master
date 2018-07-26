@@ -8,6 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.activiti.domain.SalaryDO">
+		<include refid="pagination.Oracle_Pagination_Head" />
 		select id,PROC_INS_ID,USER_ID,OFFICE_ID,POST,AGE,EDU,CONTENT,OLDA,OLDB,OLDC,NEWA,NEWB,NEWC,ADD_NUM,EXE_DATE,HR_TEXT,LEAD_TEXT,MAIN_LEAD_TEXT,create_by,create_date,update_by,update_date,remarks,del_flag from salary
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -44,9 +45,7 @@
                 order by id desc
 			</otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 	
  	<select id="count" resultType="int">
@@ -82,11 +81,11 @@
 	 
 	<insert id="save" parameterType="com.bootdo.activiti.domain.SalaryDO">
 		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_SALARY.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into salary
+			SELECT SEQ_SALARY.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into SALARY
 		(
-			id, 
+			ID, 
 			PROC_INS_ID, 
 			USER_ID, 
 			OFFICE_ID, 
@@ -105,40 +104,40 @@
 			HR_TEXT, 
 			LEAD_TEXT, 
 			MAIN_LEAD_TEXT, 
-			create_by, 
-			create_date, 
-			update_by, 
-			update_date, 
-			remarks, 
-			del_flag
+			CREATE_BY, 
+			CREATE_DATE, 
+			UPDATE_BY, 
+			UPDATE_DATE, 
+			REMARKS, 
+			DEL_FLAG
 		)
 		values
 		(
-			#{id}, 
-			#{procInsId}, 
-			#{userId}, 
-			#{officeId}, 
-			#{post}, 
-			#{age}, 
-			#{edu}, 
-			#{content}, 
-			#{olda}, 
-			#{oldb}, 
-			#{oldc}, 
-			#{newa}, 
-			#{newb}, 
-			#{newc}, 
-			#{addNum}, 
-			#{exeDate}, 
-			#{hrText}, 
-			#{leadText}, 
-			#{mainLeadText}, 
-			#{createBy}, 
-			#{createDate}, 
-			#{updateBy}, 
-			#{updateDate}, 
-			#{remarks}, 
-			#{delFlag}
+			#{id,jdbcType=VARCHAR}, 		
+			#{procInsId,jdbcType=VARCHAR}, 		
+			#{userId,jdbcType=VARCHAR}, 		
+			#{officeId,jdbcType=VARCHAR}, 		
+			#{post,jdbcType=VARCHAR}, 		
+			#{age,jdbcType=NCHAR}, 		
+			#{edu,jdbcType=VARCHAR}, 		
+			#{content,jdbcType=VARCHAR}, 		
+			#{olda,jdbcType=VARCHAR}, 		
+			#{oldb,jdbcType=VARCHAR}, 		
+			#{oldc,jdbcType=VARCHAR}, 		
+			#{newa,jdbcType=VARCHAR}, 		
+			#{newb,jdbcType=VARCHAR}, 		
+			#{newc,jdbcType=VARCHAR}, 		
+			#{addNum,jdbcType=VARCHAR}, 		
+			#{exeDate,jdbcType=VARCHAR}, 		
+			#{hrText,jdbcType=VARCHAR}, 		
+			#{leadText,jdbcType=VARCHAR}, 		
+			#{mainLeadText,jdbcType=VARCHAR}, 		
+			#{createBy,jdbcType=VARCHAR}, 		
+			#{createDate,jdbcType=DATE}, 		
+			#{updateBy,jdbcType=VARCHAR}, 		
+			#{updateDate,jdbcType=DATE}, 		
+			#{remarks,jdbcType=VARCHAR}, 		
+			#{delFlag,jdbcType=NCHAR}		
 		)
 	</insert>
 	 

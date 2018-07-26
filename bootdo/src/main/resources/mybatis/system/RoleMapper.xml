@@ -48,26 +48,28 @@
 	</select>
 
 	<insert id="save" parameterType="com.bootdo.system.domain.RoleDO">
-		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+		<selectKey resultType="long" keyProperty="roleId" order="BEFORE">  
    　　　　	SELECT SEQ_SYS_ROLE.NEXTVAL FROM DUAL   
    　　 </selectKey>
-		insert into sys_role
+		insert into SYS_ROLE
 		(
-		role_name,
-		role_sign,
-		remark,
-		user_id_create,
-		gmt_create,
-		gmt_modified
+			ROLE_ID, 
+			ROLE_NAME, 
+			ROLE_SIGN, 
+			REMARK, 
+			USER_ID_CREATE, 
+			GMT_CREATE, 
+			GMT_MODIFIED
 		)
 		values
 		(
-		#{roleName},
-		#{roleSign},
-		#{remark},
-		#{userIdCreate},
-		#{gmtCreate},
-		#{gmtModified}
+			#{roleId,jdbcType=NUMERIC}, 		
+			#{roleName,jdbcType=VARCHAR}, 		
+			#{roleSign,jdbcType=VARCHAR}, 		
+			#{remark,jdbcType=VARCHAR}, 		
+			#{userIdCreate,jdbcType=NUMERIC}, 		
+			#{gmtCreate,jdbcType=DATE}, 		
+			#{gmtModified,jdbcType=DATE}		
 		)
 	</insert>
 

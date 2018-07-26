@@ -44,21 +44,23 @@
 
 	<insert id="save" parameterType="com.bootdo.oa.domain.NotifyRecordDO">
 		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_OA_NOTIFY_RECORD.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into oa_notify_record
+			SELECT SEQ_OA_NOTIFY_RECORD.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into OA_NOTIFY_RECORD
 		(
-		notify_id,
-		user_id,
-		is_read,
-		read_date
+			ID, 
+			NOTIFY_ID, 
+			USER_ID, 
+			IS_READ, 
+			READ_DATE
 		)
 		values
 		(
-		#{notifyId},
-		#{userId},
-		#{isRead},
-		#{readDate}
+			#{id,jdbcType=NUMERIC}, 		
+			#{notifyId,jdbcType=NUMERIC}, 		
+			#{userId,jdbcType=NUMERIC}, 		
+			#{isRead,jdbcType=NUMERIC}, 		
+			#{readDate,jdbcType=DATE}		
 		)
 	</insert>
 

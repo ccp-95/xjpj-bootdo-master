@@ -43,22 +43,24 @@
 	</select>
 
 	<insert id="save" parameterType="com.bootdo.system.domain.DeptDO">
-		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_SYS_DEPT.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into sys_dept
+		<selectKey resultType="long" keyProperty="deptId" order="BEFORE">  
+			SELECT SEQ_SYS_DEPT.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into SYS_DEPT
 		(
-		parent_id,
-		name,
-		order_num,
-		del_flag
+			DEPT_ID, 
+			PARENT_ID, 
+			NAME, 
+			ORDER_NUM, 
+			DEL_FLAG
 		)
 		values
 		(
-		#{parentId},
-		#{name},
-		#{orderNum},
-		#{delFlag}
+			#{deptId,jdbcType=NUMERIC}, 		
+			#{parentId,jdbcType=NUMERIC}, 		
+			#{name,jdbcType=VARCHAR}, 		
+			#{orderNum,jdbcType=NUMERIC}, 		
+			#{delFlag,jdbcType=NUMERIC}		
 		)
 	</insert>
 

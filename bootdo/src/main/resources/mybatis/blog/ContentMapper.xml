@@ -66,48 +66,50 @@
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.blog.domain.ContentDO">
-		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_BLOG_CONTENT.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into blog_content
+		<selectKey resultType="long" keyProperty="cid" order="BEFORE">  
+			SELECT SEQ_BLOG_CONTENT.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into BLOG_CONTENT
 		(
-			title, 
-			slug, 
-			created, 
-			modified, 
-			content, 
-			type, 
-			tags, 
-			categories, 
-			hits, 
-			comments_num, 
-			allow_comment, 
-			allow_ping, 
-			allow_feed, 
-			status, 
-			author, 
-			gtm_create, 
-			gtm_modified
+			CID, 
+			TITLE, 
+			SLUG, 
+			CREATED, 
+			MODIFIED, 
+			CONTENT, 
+			TYPE, 
+			TAGS, 
+			CATEGORIES, 
+			HITS, 
+			COMMENTS_NUM, 
+			ALLOW_COMMENT, 
+			ALLOW_PING, 
+			ALLOW_FEED, 
+			STATUS, 
+			AUTHOR, 
+			GTM_CREATE, 
+			GTM_MODIFIED
 		)
 		values
 		(
-			#{title}, 
-			#{slug}, 
-			#{created}, 
-			#{modified}, 
-			#{content}, 
-			#{type}, 
-			#{tags}, 
-			#{categories}, 
-			#{hits}, 
-			#{commentsNum}, 
-			#{allowComment}, 
-			#{allowPing}, 
-			#{allowFeed}, 
-			#{status}, 
-			#{author}, 
-			#{gtmCreate}, 
-			#{gtmModified}
+			#{cid,jdbcType=NUMERIC}, 		
+			#{title,jdbcType=VARCHAR}, 		
+			#{slug,jdbcType=VARCHAR}, 		
+			#{created,jdbcType=NUMERIC}, 		
+			#{modified,jdbcType=NUMERIC}, 		
+			#{content,jdbcType=NCLOB}, 		
+			#{type,jdbcType=VARCHAR}, 		
+			#{tags,jdbcType=VARCHAR}, 		
+			#{categories,jdbcType=VARCHAR}, 		
+			#{hits,jdbcType=NUMERIC}, 		
+			#{commentsNum,jdbcType=NUMERIC}, 		
+			#{allowComment,jdbcType=NUMERIC}, 		
+			#{allowPing,jdbcType=NUMERIC}, 		
+			#{allowFeed,jdbcType=NUMERIC}, 		
+			#{status,jdbcType=NUMERIC}, 		
+			#{author,jdbcType=VARCHAR}, 		
+			#{gtmCreate,jdbcType=DATE}, 		
+			#{gtmModified,jdbcType=DATE}		
 		)
 	</insert>
 	 

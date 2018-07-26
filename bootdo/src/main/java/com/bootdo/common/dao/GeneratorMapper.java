@@ -18,7 +18,7 @@ public interface GeneratorMapper {
 	Map<String, String> get(String tableName);
 
 	@Select("select t.column_name columnName, t.data_type dataType, c.comments columnComment,CASE WHEN cu.column_name = t.COLUMN_NAME then 'PRI' else '' end as COLUMBKEY "
-			+ " from user_tab_columns t,user_col_comments c,user_cons_columns cu, user_constraints au "
-			+ " where t.table_name = c.table_name and t.column_name = c.column_name and t.table_name = #{tableName} and au.table_name=t.table_name and cu.constraint_name = au.constraint_name and au.constraint_type = 'P' order by t.column_id")
+			+ " from user_tab_columns t left join user_col_comments c on t.table_name = c.table_name and t.column_name = c.column_name left join user_constraints au on au.table_name=t.table_name and au.constraint_type = 'P' left join user_cons_columns cu on cu.constraint_name = au.constraint_name  "
+			+ " where t.table_name = #{tableName} order by t.column_id")
 	List<Map<String, String>> listColumns(String tableName);
 }

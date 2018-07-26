@@ -68,50 +68,52 @@
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.system.domain.UserDO">
-		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_SYS_USER.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into sys_user
+		<selectKey resultType="long" keyProperty="userId" order="BEFORE">  
+			SELECT SEQ_SYS_USER.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into SYS_USER
 		(
-			username, 
-			name, 
-			password, 
-			dept_id, 
-			email, 
-			mobile, 
-			status, 
-			user_id_create, 
-			gmt_create, 
-			gmt_modified, 
-			sex, 
-			birth, 
-			pic_id, 
-			live_address, 
-			hobby, 
-			province, 
-			city, 
-			district
+			USER_ID, 
+			USERNAME, 
+			NAME, 
+			PASSWORD, 
+			DEPT_ID, 
+			EMAIL, 
+			MOBILE, 
+			STATUS, 
+			USER_ID_CREATE, 
+			GMT_CREATE, 
+			GMT_MODIFIED, 
+			SEX, 
+			BIRTH, 
+			PIC_ID, 
+			LIVE_ADDRESS, 
+			HOBBY, 
+			PROVINCE, 
+			CITY, 
+			DISTRICT
 		)
 		values
 		(
-			#{username}, 
-			#{name}, 
-			#{password}, 
-			#{deptId}, 
-			#{email}, 
-			#{mobile}, 
-			#{status}, 
-			#{userIdCreate}, 
-			#{gmtCreate}, 
-			#{gmtModified}, 
-			#{sex}, 
-			#{birth}, 
-			#{picId}, 
-			#{liveAddress}, 
-			#{hobby}, 
-			#{province}, 
-			#{city}, 
-			#{district}
+			#{userId,jdbcType=NUMERIC}, 		
+			#{username,jdbcType=VARCHAR}, 		
+			#{name,jdbcType=VARCHAR}, 		
+			#{password,jdbcType=VARCHAR}, 		
+			#{deptId,jdbcType=NUMERIC}, 		
+			#{email,jdbcType=VARCHAR}, 		
+			#{mobile,jdbcType=VARCHAR}, 		
+			#{status,jdbcType=NUMERIC}, 		
+			#{userIdCreate,jdbcType=NUMERIC}, 		
+			#{gmtCreate,jdbcType=DATE}, 		
+			#{gmtModified,jdbcType=DATE}, 		
+			#{sex,jdbcType=NUMERIC}, 		
+			#{birth,jdbcType=DATE}, 		
+			#{picId,jdbcType=NUMERIC}, 		
+			#{liveAddress,jdbcType=VARCHAR}, 		
+			#{hobby,jdbcType=VARCHAR}, 		
+			#{province,jdbcType=VARCHAR}, 		
+			#{city,jdbcType=VARCHAR}, 		
+			#{district,jdbcType=VARCHAR}		
 		)
 	</insert>
 	 

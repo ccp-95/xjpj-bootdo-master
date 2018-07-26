@@ -10,6 +10,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.oa.domain.NotifyDO">
+		<include refid="pagination.Oracle_Pagination_Head" />
 		select
 		id,type,title,content,files,status,create_by,create_date,update_by,update_date,remarks,del_flag
 		from oa_notify
@@ -35,9 +36,7 @@
 				order by id desc
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
+		<include refid="pagination.Oracle_Pagination_Tail" />
 	</select>
 
 	<select id="count" resultType="int">
@@ -60,35 +59,37 @@
 
 	<insert id="save" parameterType="com.bootdo.oa.domain.NotifyDO">
 		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_OA_NOTIFY.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into oa_notify
+			SELECT SEQ_OA_NOTIFY.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into OA_NOTIFY
 		(
-		type,
-		title,
-		content,
-		files,
-		status,
-		create_by,
-		create_date,
-		update_by,
-		update_date,
-		remarks,
-		del_flag
+			ID, 
+			TYPE, 
+			TITLE, 
+			CONTENT, 
+			FILES, 
+			STATUS, 
+			CREATE_BY, 
+			CREATE_DATE, 
+			UPDATE_BY, 
+			UPDATE_DATE, 
+			REMARKS, 
+			DEL_FLAG
 		)
 		values
 		(
-		#{type},
-		#{title},
-		#{content},
-		#{files},
-		#{status},
-		#{createBy},
-		#{createDate},
-		#{updateBy},
-		#{updateDate},
-		#{remarks},
-		#{delFlag}
+			#{id,jdbcType=NUMERIC}, 		
+			#{type,jdbcType=NCHAR}, 		
+			#{title,jdbcType=VARCHAR}, 		
+			#{content,jdbcType=NCLOB}, 		
+			#{files,jdbcType=NCLOB}, 		
+			#{status,jdbcType=NCHAR}, 		
+			#{createBy,jdbcType=NUMERIC}, 		
+			#{createDate,jdbcType=DATE}, 		
+			#{updateBy,jdbcType=VARCHAR}, 		
+			#{updateDate,jdbcType=DATE}, 		
+			#{remarks,jdbcType=VARCHAR}, 		
+			#{delFlag,jdbcType=NCHAR}		
 		)
 	</insert>
 

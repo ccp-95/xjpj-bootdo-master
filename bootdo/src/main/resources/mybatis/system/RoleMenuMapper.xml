@@ -38,17 +38,19 @@
 
 	<insert id="save" parameterType="com.bootdo.system.domain.RoleMenuDO">
 		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
-   　　　　	SELECT SEQ_SYS_ROLE_MENU.NEXTVAL FROM DUAL   
-   　　 </selectKey>
-		insert into sys_role_menu
+			SELECT SEQ_SYS_ROLE_MENU.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into SYS_ROLE_MENU
 		(
-		role_id,
-		menu_id
+			ID, 
+			ROLE_ID, 
+			MENU_ID
 		)
 		values
 		(
-		#{roleId},
-		#{menuId}
+			#{id,jdbcType=NUMERIC}, 		
+			#{roleId,jdbcType=NUMERIC}, 		
+			#{menuId,jdbcType=NUMERIC}		
 		)
 	</insert>
 

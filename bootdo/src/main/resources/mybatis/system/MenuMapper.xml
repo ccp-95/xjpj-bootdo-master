@@ -54,32 +54,34 @@
 	</select>
 
 	<insert id="save" parameterType="com.bootdo.system.domain.MenuDO">
-		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+		<selectKey resultType="long" keyProperty="menuId" order="BEFORE">  
    　　　　	SELECT SEQ_SYS_MENU.NEXTVAL FROM DUAL   
    　　 </selectKey>
-		insert into sys_menu
+		insert into SYS_MENU
 		(
-		parent_id,
-		name,
-		url,
-		perms,
-		type,
-		icon,
-		order_num,
-		gmt_create,
-		gmt_modified
+			MENU_ID, 
+			PARENT_ID, 
+			NAME, 
+			URL, 
+			PERMS, 
+			TYPE, 
+			ICON, 
+			ORDER_NUM, 
+			GMT_CREATE, 
+			GMT_MODIFIED
 		)
 		values
 		(
-		#{parentId},
-		#{name},
-		#{url},
-		#{perms},
-		#{type},
-		#{icon},
-		#{orderNum},
-		#{gmtCreate},
-		#{gmtModified}
+			#{menuId,jdbcType=NUMERIC}, 		
+			#{parentId,jdbcType=NUMERIC}, 		
+			#{name,jdbcType=VARCHAR}, 		
+			#{url,jdbcType=VARCHAR}, 		
+			#{perms,jdbcType=VARCHAR}, 		
+			#{type,jdbcType=NUMERIC}, 		
+			#{icon,jdbcType=VARCHAR}, 		
+			#{orderNum,jdbcType=NUMERIC}, 		
+			#{gmtCreate,jdbcType=DATE}, 		
+			#{gmtModified,jdbcType=DATE}		
 		)
 	</insert>
 
