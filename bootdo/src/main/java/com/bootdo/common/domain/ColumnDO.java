@@ -42,6 +42,7 @@ public class ColumnDO {
 		put("CLOB","CLOB");
 		put("BLOB","BLOB");
 		put("NCHAR","NCHAR");
+		put("CHAR","CHAR");
 		}};;
 	public String getColumnName() {
 		return columnName;

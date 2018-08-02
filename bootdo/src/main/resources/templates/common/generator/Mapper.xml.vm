@@ -36,7 +36,7 @@
 	</select>
 	 
 	<insert id="save" parameterType="${package}.domain.${className}DO">
-		<selectKey resultType="long" keyProperty="$pk.attrname" order="BEFORE">  
+		<selectKey resultType="int" keyProperty="$pk.attrname" order="BEFORE">  
 			SELECT SEQ_${tableName}.NEXTVAL FROM DUAL   
 		</selectKey>  
 		insert into ${tableName}

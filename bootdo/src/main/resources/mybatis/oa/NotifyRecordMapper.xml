@@ -92,21 +92,23 @@
 		useGeneratedKeys="true" keyProperty="id">
 		insert into oa_notify_record
 		(
+		id,
 		notify_id,
 		user_id,
 		is_read,
 		read_date
-		)
-		values
-		<foreach item="item" index="index" collection="list"
-			separator=",">
-			(
-			#{item.notifyId},
-			#{item.userId},
-			#{item.isRead},
-			#{item.readDate}
-			)
+		) 
+		SELECT SEQ_OA_NOTIFY_RECORD.NEXTVAL,cd.* from(
+		<foreach item="item" index="index" collection="list" close=")" open="(" 
+			separator="union">
+			select
+			#{item.notifyId,jdbcType=NUMERIC},
+			#{item.userId,jdbcType=NUMERIC},
+			#{item.isRead,jdbcType=NUMERIC},
+			#{item.readDate,jdbcType=DATE}
+			from dual
 		</foreach>
+		) cd
 	</insert>
 
 	<select id="listNotifyIds" resultType="long">

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zztlj.xjpj.dao.PingdingxinxiDao">
+
+	<select id="get" resultType="com.zztlj.xjpj.domain.PingdingxinxiDO">
+		select ID,KHZQ,DEPT_ID,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ from XJPJ_PINGDINGXINXI where ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.zztlj.xjpj.domain.PingdingxinxiDO">
+	    <include refid="pagination.Oracle_Pagination_Head" />
+		select ID,KHZQ,DEPT_ID,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ from XJPJ_PINGDINGXINXI
+        <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="khzq != null and khzq != ''"> and KHZQ = #{khzq} </if>
+		  		  <if test="deptId != null and deptId != ''"> and DEPT_ID = #{deptId} </if>
+		  		  <if test="zgxm != null and zgxm != ''"> and ZGXM = #{zgxm} </if>
+		  		  <if test="nl != null and nl != ''"> and NL = #{nl} </if>
+		  		  <if test="xb != null and xb != ''"> and XB = #{xb} </if>
+		  		  <if test="cheJian != null and cheJian != ''"> and CHE_JIAN = #{cheJian} </if>
+		  		  <if test="banZu != null and banZu != ''"> and BAN_ZU = #{banZu} </if>
+		  		  <if test="gangWei != null and gangWei != ''"> and GANG_WEI = #{gangWei} </if>
+		  		  <if test="sfzh != null and sfzh != ''"> and SFZH = #{sfzh} </if>
+		  		  <if test="xingJi != null and xingJi != ''"> and XING_JI = #{xingJi} </if>
+		  		  <if test="zhdf != null and zhdf != ''"> and ZHDF = #{zhdf} </if>
+		  		  <if test="ywjn != null and ywjn != ''"> and YWJN = #{ywjn} </if>
+		  		  <if test="zzsj != null and zzsj != ''"> and ZZSJ = #{zzsj} </if>
+		  		  <if test="aqjx != null and aqjx != ''"> and AQJX = #{aqjx} </if>
+		  		  <if test="wcgz != null and wcgz != ''"> and WCGZ = #{wcgz} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by ID desc
+			</otherwise>
+        </choose>
+		<include refid="pagination.Oracle_Pagination_Tail" />
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from XJPJ_PINGDINGXINXI
+		 <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="khzq != null and khzq != ''"> and KHZQ = #{khzq} </if>
+		  		  <if test="deptId != null and deptId != ''"> and DEPT_ID = #{deptId} </if>
+		  		  <if test="zgxm != null and zgxm != ''"> and ZGXM = #{zgxm} </if>
+		  		  <if test="nl != null and nl != ''"> and NL = #{nl} </if>
+		  		  <if test="xb != null and xb != ''"> and XB = #{xb} </if>
+		  		  <if test="cheJian != null and cheJian != ''"> and CHE_JIAN = #{cheJian} </if>
+		  		  <if test="banZu != null and banZu != ''"> and BAN_ZU = #{banZu} </if>
+		  		  <if test="gangWei != null and gangWei != ''"> and GANG_WEI = #{gangWei} </if>
+		  		  <if test="sfzh != null and sfzh != ''"> and SFZH = #{sfzh} </if>
+		  		  <if test="xingJi != null and xingJi != ''"> and XING_JI = #{xingJi} </if>
+		  		  <if test="zhdf != null and zhdf != ''"> and ZHDF = #{zhdf} </if>
+		  		  <if test="ywjn != null and ywjn != ''"> and YWJN = #{ywjn} </if>
+		  		  <if test="zzsj != null and zzsj != ''"> and ZZSJ = #{zzsj} </if>
+		  		  <if test="aqjx != null and aqjx != ''"> and AQJX = #{aqjx} </if>
+		  		  <if test="wcgz != null and wcgz != ''"> and WCGZ = #{wcgz} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.zztlj.xjpj.domain.PingdingxinxiDO">
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">  
+			SELECT SEQ_XJPJ_PINGDINGXINXI.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into XJPJ_PINGDINGXINXI
+		(
+			ID, 
+			KHZQ, 
+			DEPT_ID, 
+			ZGXM, 
+			NL, 
+			XB, 
+			CHE_JIAN, 
+			BAN_ZU, 
+			GANG_WEI, 
+			SFZH, 
+			XING_JI, 
+			ZHDF, 
+			YWJN, 
+			ZZSJ, 
+			AQJX, 
+			WCGZ
+		)
+		values
+		(
+			#{id,jdbcType=NUMERIC}, 		
+			#{khzq,jdbcType=VARCHAR}, 		
+			#{deptId,jdbcType=NUMERIC}, 		
+			#{zgxm,jdbcType=VARCHAR}, 		
+			#{nl,jdbcType=NUMERIC}, 		
+			#{xb,jdbcType=CHAR}, 		
+			#{cheJian,jdbcType=VARCHAR}, 		
+			#{banZu,jdbcType=VARCHAR}, 		
+			#{gangWei,jdbcType=VARCHAR}, 		
+			#{sfzh,jdbcType=VARCHAR}, 		
+			#{xingJi,jdbcType=NUMERIC}, 		
+			#{zhdf,jdbcType=NUMERIC}, 		
+			#{ywjn,jdbcType=NUMERIC}, 		
+			#{zzsj,jdbcType=NUMERIC}, 		
+			#{aqjx,jdbcType=NUMERIC}, 		
+			#{wcgz,jdbcType=NUMERIC}		
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.zztlj.xjpj.domain.PingdingxinxiDO">
+		update XJPJ_PINGDINGXINXI 
+		<set>
+			<if test="khzq != null"> KHZQ  = #{khzq}, </if>
+			<if test="deptId != null"> DEPT_ID  = #{deptId}, </if>
+			<if test="zgxm != null"> ZGXM  = #{zgxm}, </if>
+			<if test="nl != null"> NL  = #{nl}, </if>
+			<if test="xb != null"> XB  = #{xb}, </if>
+			<if test="cheJian != null"> CHE_JIAN  = #{cheJian}, </if>
+			<if test="banZu != null"> BAN_ZU  = #{banZu}, </if>
+			<if test="gangWei != null"> GANG_WEI  = #{gangWei}, </if>
+			<if test="sfzh != null"> SFZH  = #{sfzh}, </if>
+			<if test="xingJi != null"> XING_JI  = #{xingJi}, </if>
+			<if test="zhdf != null"> ZHDF  = #{zhdf}, </if>
+			<if test="ywjn != null"> YWJN  = #{ywjn}, </if>
+			<if test="zzsj != null"> ZZSJ  = #{zzsj}, </if>
+			<if test="aqjx != null"> AQJX  = #{aqjx}, </if>
+			<if test="wcgz != null"> WCGZ  = #{wcgz}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from XJPJ_PINGDINGXINXI where ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from XJPJ_PINGDINGXINXI where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -98,10 +98,15 @@
 	</delete>
 
 	<insert id="batchSave">
-		INSERT INTO sys_user_role(user_id, role_id) values
-		<foreach item="item" index="index" collection="list"
-			separator=",">
-			(#{item.userId},#{item.roleId})
+		INSERT INTO sys_user_role(id, user_id, role_id) 
+		SELECT SEQ_SYS_USER_ROLE.NEXTVAL,cd.* from(
+		<foreach item="item" index="index" collection="list" close=")" open="(" 
+			separator="union">
+			select
+			#{item.userId,jdbcType=NUMERIC},
+			#{item.roleId,jdbcType=NUMERIC}
+			from dual
 		</foreach>
+		) cd
 	</insert>
 </mapper>
