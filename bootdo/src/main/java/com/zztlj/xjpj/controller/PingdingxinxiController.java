@@ -1,7 +1,10 @@
 package com.zztlj.xjpj.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.zztlj.xjpj.domain.PingdingxinxiDO;
 import com.zztlj.xjpj.service.PingdingxinxiService;
+import com.bootdo.common.domain.FileDO;
+import com.bootdo.common.utils.FileType;
+import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -51,6 +58,12 @@ public class PingdingxinxiController {
 		int total = pingdingxinxiService.count(query);
 		PageUtils pageUtils = new PageUtils(pingdingxinxiList, total);
 		return pageUtils;
+	}
+	
+	@GetMapping("/importExcel")
+	@RequiresPermissions("xjpj:pingdingxinxi:import")
+	String importExcel(){
+	    return "xjpj/pingdingxinxi/importExcel";
 	}
 	
 	@GetMapping("/add")
@@ -114,4 +127,22 @@ public class PingdingxinxiController {
 		return R.ok();
 	}
 	
+	/**
+	 * 导入Excel
+	 */
+	@ResponseBody
+	@PostMapping("/uploadExcel")
+	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+		
+		String fileName = file.getOriginalFilename();
+		fileName = FileUtil.renameToUUID(fileName);
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		try {
+			System.out.println(sysFile.toString());
+			return R.ok().put("fileName",sysFile.getUrl());
+		} catch (Exception e) {
+			return R.error();
+		}
+
+	}
 }
