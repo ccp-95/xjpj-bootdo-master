@@ -52,6 +52,12 @@
 				elem : '#uploadExcel1', //绑定元素
 				url : '/xjpj/pingdingxinxi/uploadExcel', //上传接口
 				size : 1000,
+				data: {
+					  khzq: function(){
+					    return '201807';
+					  }
+				},
+				exts : 'xls|xlsx',
 				accept : 'file',
 				done : function(r) {
 					layer.msg(r.msg);

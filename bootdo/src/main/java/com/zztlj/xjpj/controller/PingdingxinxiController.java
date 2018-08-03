@@ -132,13 +132,13 @@ public class PingdingxinxiController {
 	 */
 	@ResponseBody
 	@PostMapping("/uploadExcel")
-	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+	R upload(@RequestParam("file") MultipartFile file,@RequestParam("khzq") String khzq,HttpServletRequest request) {
 		
 		String fileName = file.getOriginalFilename();
 		fileName = FileUtil.renameToUUID(fileName);
 		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
 		try {
-			System.out.println(sysFile.toString());
+			System.out.println("考核周期 ："+khzq+"  "+sysFile.toString());
 			return R.ok().put("fileName",sysFile.getUrl());
 		} catch (Exception e) {
 			return R.error();
