@@ -4,6 +4,7 @@ logging:
   level:
     root: info
     com.bootdo: debug
+    com.ibatis: debug
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

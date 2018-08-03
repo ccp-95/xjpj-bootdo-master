@@ -3,6 +3,7 @@ package com.zztlj.xjpj.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,24 @@ public class PingdingxinxiServiceImpl implements PingdingxinxiService {
 	@Override
 	public int batchRemove(Double[] ids){
 		return pingdingxinxiDao.batchRemove(ids);
+	}
+
+	@Override
+	public int saveOrUpdate(PingdingxinxiDO pingdingxinxi) {
+		String sfzh = pingdingxinxi.getSfzh();
+		if (sfzh == null || sfzh.length() == 0) {
+			return 0;
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sfzh", sfzh);
+		int count = pingdingxinxiDao.count(map);
+		if (count == 0) {
+			return pingdingxinxiDao.save(pingdingxinxi);
+		}
+		else if (count == 1) {
+			return pingdingxinxiDao.updateWithSfzh(pingdingxinxi);
+		}
+		return 0;
 	}
 	
 }

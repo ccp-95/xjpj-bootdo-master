@@ -1,12 +1,16 @@
 package com.zztlj.xjpj.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.zztlj.xjpj.domain.PingdingxinxiDO;
 import com.zztlj.xjpj.service.PingdingxinxiService;
@@ -27,6 +32,8 @@ import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.system.domain.UserDO;
+import com.github.crab2died.ExcelUtils;
 
 /**
  * ${comments}
@@ -135,10 +142,26 @@ public class PingdingxinxiController {
 	R upload(@RequestParam("file") MultipartFile file,@RequestParam("khzq") String khzq,HttpServletRequest request) {
 		
 		String fileName = file.getOriginalFilename();
+		InputStream iStream;
+		try {
+			iStream = file.getInputStream();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return R.error();
+		}
 		fileName = FileUtil.renameToUUID(fileName);
 		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
 		try {
 			System.out.println("考核周期 ："+khzq+"  "+sysFile.toString());
+			UserDO  user = (UserDO) SecurityUtils.getSubject().getPrincipal();
+			List<PingdingxinxiDO> list = ExcelUtils.getInstance().readExcel2Objects(iStream, PingdingxinxiDO.class);
+            System.out.println("读取Excel至String数组：");
+            for (PingdingxinxiDO pdxx : list) {
+            	pdxx.setKhzq(khzq);
+            	pdxx.setDeptId(user.getDeptId());
+                pingdingxinxiService.saveOrUpdate(pdxx);
+            }
 			return R.ok().put("fileName",sysFile.getUrl());
 		} catch (Exception e) {
 			return R.error();

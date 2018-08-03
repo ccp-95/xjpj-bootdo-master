@@ -3,11 +3,13 @@
 <meta charset="utf-8">
 <head>
 <link rel="shortcut icon" href="favicon.ico">
-    <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/layui.css" rel="stylesheet">
-    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/layui.css" rel="stylesheet">
+<link href="/css/lay/modules/laydate/default/laydate.css"
+	rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
@@ -31,8 +33,7 @@
 							</div> -->
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
-									<button type="button" 
-										id="uploadExcel1">上传文件</button>
+									<button type="button" id="uploadExcel1">上传文件</button>
 								</div>
 							</div>
 						</form>
@@ -52,19 +53,32 @@
 				elem : '#uploadExcel1', //绑定元素
 				url : '/xjpj/pingdingxinxi/uploadExcel', //上传接口
 				size : 1000,
-				data: {
-					  khzq: function(){
-					    return '201807';
-					  }
+				data : {
+					khzq : function() {
+						return $('#khzq').val();
+					}
 				},
 				exts : 'xls|xlsx',
 				accept : 'file',
 				done : function(r) {
-					layer.msg(r.msg);
+					parent.layer.msg("操作成功");
+					parent.reLoad();
+					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+					parent.layer.close(index);
 				},
 				error : function(r) {
-					layer.msg(r.msg);
+					parent.layer.alert(data.msg)
 				}
+			});
+		});
+
+		layui.use('laydate', function() {
+			var laydate = layui.laydate;
+			//执行实例
+			var laydateInst = laydate.render({
+				elem : '#khzq', //绑定元素
+				type : 'month',
+				format : 'yyyyMM'
 			});
 		});
 	</script>

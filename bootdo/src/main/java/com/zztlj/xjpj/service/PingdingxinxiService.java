@@ -27,4 +27,6 @@ public interface PingdingxinxiService {
 	int remove(Double id);
 	
 	int batchRemove(Double[] ids);
+	
+	int saveOrUpdate(PingdingxinxiDO pingdingxinxi);
 }

@@ -127,6 +127,27 @@
 		where ID = #{id}
 	</update>
 	
+	<update id="updateWithSfzh" parameterType="com.zztlj.xjpj.domain.PingdingxinxiDO">
+		update XJPJ_PINGDINGXINXI 
+		<set>
+			<if test="khzq != null"> KHZQ  = #{khzq}, </if>
+			<if test="deptId != null"> DEPT_ID  = #{deptId}, </if>
+			<if test="zgxm != null"> ZGXM  = #{zgxm}, </if>
+			<if test="nl != null"> NL  = #{nl}, </if>
+			<if test="xb != null"> XB  = #{xb}, </if>
+			<if test="cheJian != null"> CHE_JIAN  = #{cheJian}, </if>
+			<if test="banZu != null"> BAN_ZU  = #{banZu}, </if>
+			<if test="gangWei != null"> GANG_WEI  = #{gangWei}, </if>
+			<if test="xingJi != null"> XING_JI  = #{xingJi}, </if>
+			<if test="zhdf != null"> ZHDF  = #{zhdf}, </if>
+			<if test="ywjn != null"> YWJN  = #{ywjn}, </if>
+			<if test="zzsj != null"> ZZSJ  = #{zzsj}, </if>
+			<if test="aqjx != null"> AQJX  = #{aqjx}, </if>
+			<if test="wcgz != null"> WCGZ  = #{wcgz}</if>
+		</set>
+		where sfzh = #{sfzh}
+	</update>
+	
 	<delete id="remove">
 		delete from XJPJ_PINGDINGXINXI where ID = #{value}
 	</delete>

@@ -26,6 +26,8 @@ public interface PingdingxinxiDao {
 	
 	int update(PingdingxinxiDO pingdingxinxi);
 	
+	int updateWithSfzh(PingdingxinxiDO pingdingxinxi);
+	
 	int remove(Double ID);
 	
 	int batchRemove(Double[] ids);

@@ -3,6 +3,9 @@ package com.zztlj.xjpj.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.github.crab2died.annotation.ExcelField;
+import com.zztlj.xjpj.utils.PingdingxinxiXBConverter;
+
 
 
 /**
@@ -15,47 +18,63 @@ import java.util.Date;
 public class PingdingxinxiDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//$column.comments
+	//序号
+	@ExcelField(title = "序号", order = 1)
 	private Integer id;
 	//考核周期
+	@ExcelField(title = "考核周期", order = 2)
 	private String khzq;
 	//单位
-	private Double deptId;
+	@ExcelField(title = "单位", order = 3)
+	private Long deptId;
 	//职工姓名
+	@ExcelField(title = "职工姓名", order = 4)
 	private String zgxm;
-	//$column.comments
+	//年龄
+	@ExcelField(title = "年龄", order = 5)
 	private Double nl;
 	//性别 0：女 1：男
+	@ExcelField(title = "性别", order = 6,readConverter = PingdingxinxiXBConverter.class)
 	private String xb;
 	//车间
+	@ExcelField(title = "所在车间", order = 7)
 	private String cheJian;
 	//班组
+	@ExcelField(title = "所在班组", order = 8)
 	private String banZu;
 	//岗位
+	@ExcelField(title = "岗位名称", order = 9)
 	private String gangWei;
 	//身份证号
+	@ExcelField(title = "身份证号", order = 10)
 	private String sfzh;
 	//星级
+	@ExcelField(title = "星级", order = 11)
 	private Double xingJi;
 	//综合得分
+	@ExcelField(title = "综合得分", order = 12)
 	private Double zhdf;
 	//业务技能
+	@ExcelField(title = "业务技能", order = 13)
 	private Double ywjn;
 	//遵章守纪
+	@ExcelField(title = "遵章守纪", order = 14)
 	private Double zzsj;
 	//安全绩效
+	@ExcelField(title = "安全绩效", order = 15)
 	private Double aqjx;
 	//完成工作
+	@ExcelField(title = "完成工作", order = 16)
 	private Double wcgz;
 
 	/**
-	 * 设置：${column.comments}
+	 * 设置：序号
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**
-	 * 获取：${column.comments}
+	 * 获取：序号
 	 */
 	public Integer getId() {
 		return id;
@@ -75,13 +94,13 @@ public class PingdingxinxiDO implements Serializable {
 	/**
 	 * 设置：单位
 	 */
-	public void setDeptId(Double deptId) {
+	public void setDeptId(Long deptId) {
 		this.deptId = deptId;
 	}
 	/**
 	 * 获取：单位
 	 */
-	public Double getDeptId() {
+	public Long getDeptId() {
 		return deptId;
 	}
 	/**
@@ -97,13 +116,13 @@ public class PingdingxinxiDO implements Serializable {
 		return zgxm;
 	}
 	/**
-	 * 设置：${column.comments}
+	 * 设置：年龄
 	 */
 	public void setNl(Double nl) {
 		this.nl = nl;
 	}
 	/**
-	 * 获取：${column.comments}
+	 * 获取：年龄
 	 */
 	public Double getNl() {
 		return nl;
