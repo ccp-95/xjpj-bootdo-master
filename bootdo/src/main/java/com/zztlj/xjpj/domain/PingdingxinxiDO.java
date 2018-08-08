@@ -1,7 +1,6 @@
 package com.zztlj.xjpj.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import com.github.crab2died.annotation.ExcelField;
 import com.zztlj.xjpj.utils.PingdingxinxiXBConverter;
@@ -25,8 +24,11 @@ public class PingdingxinxiDO implements Serializable {
 	@ExcelField(title = "考核周期", order = 2)
 	private String khzq;
 	//单位
-	@ExcelField(title = "单位", order = 3)
 	private Long deptId;
+	//单位名称
+	@ExcelField(title = "单位", order = 3)
+	private String deptName;
+	
 	//职工姓名
 	@ExcelField(title = "职工姓名", order = 4)
 	private String zgxm;
@@ -102,6 +104,12 @@ public class PingdingxinxiDO implements Serializable {
 	 */
 	public Long getDeptId() {
 		return deptId;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 	/**
 	 * 设置：职工姓名

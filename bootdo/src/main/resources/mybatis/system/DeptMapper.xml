@@ -25,7 +25,7 @@
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
-				order by dept_id desc
+				order by order_num
 			</otherwise>
 		</choose>
 		<include refid="pagination.Oracle_Pagination_Tail" />

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.system.dao.DeptDao;
 import com.zztlj.xjpj.dao.PingdingxinxiDao;
 import com.zztlj.xjpj.domain.PingdingxinxiDO;
 import com.zztlj.xjpj.service.PingdingxinxiService;
@@ -17,6 +18,8 @@ import com.zztlj.xjpj.service.PingdingxinxiService;
 public class PingdingxinxiServiceImpl implements PingdingxinxiService {
 	@Autowired
 	private PingdingxinxiDao pingdingxinxiDao;
+	@Autowired
+    DeptDao deptMapper;
 	
 	@Override
 	public PingdingxinxiDO get(Double id){
@@ -60,7 +63,9 @@ public class PingdingxinxiServiceImpl implements PingdingxinxiService {
 			return 0;
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("khzq", pingdingxinxi.getKhzq());
 		map.put("sfzh", sfzh);
+		map.put("deptId", pingdingxinxi.getDeptId());
 		int count = pingdingxinxiDao.count(map);
 		if (count == 0) {
 			return pingdingxinxiDao.save(pingdingxinxi);

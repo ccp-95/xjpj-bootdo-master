@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="xjpj/front/include_front::header"></head>
+<body>
+	<nav th:include="xjpj/front/include_front::nav"
+		class="navbar navbar-default navbar-custom navbar-fixed-top"></nav>
+	<header class="intro-header"
+		style="background-image: url('/img/blog/home-bg.jpg')">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<div class="site-heading">
+						<h2>
+							中国铁路郑州局集团有限公司星级职工评价系统
+							</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Main Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<table id="exampleTable">
+					<thead>
+						<tr class="success">
+							<th data-formatter="xhFormatter" rowspan="2" data-valign="middle"
+								data-align="center">序号</th>
+							<th data-field="deptName" rowspan="2" data-valign="middle"
+								data-align="center">单位</th>
+							<th data-field="pdzgrs" rowspan="2" data-valign="middle"
+								data-align="center">参与职工人数</th>
+							<th colspan="2" data-valign="middle" data-align="center">三星级</th>
+							<th colspan="2" data-valign="middle" data-align="center">二星级</th>
+							<th colspan="2" data-valign="middle" data-align="center">一星级</th>
+						</tr>
+						<tr class="success">
+							<th data-field="sxrs" data-align="center">人数</th>
+							<th data-field="sxbl" data-align="center">比例</th>
+
+							<th data-field="exrs" data-align="center">人数</th>
+							<th data-field="exbl" data-align="center">比例</th>
+
+							<th data-field="yxrs" data-align="center">人数</th>
+							<th data-field="yxbl" data-align="center">比例</th>
+
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+<div th:include="xjpj/front/include_front::footer"></div>
+<script type="text/javascript">
+	var limit = 10;
+	var currentPage = 0;
+	var total;
+	$(function() {
+		var khzq = "201808";
+		load(khzq);
+
+	});
+
+	function load(khzq) {
+		$('#exampleTable').bootstrapTable({
+			method : 'get', // 服务器数据的请求方式 get or post
+			url : 'xjpj/statistics/pdqktj?khzq=' + khzq, // 服务器数据的加载地址
+			striped : true, // 设置为true会有隔行变色效果
+			dataType : "json", // 服务器返回的数据类型
+			pagination : false, // 设置为true会在底部显示分页条
+			// queryParamsType : "limit",
+			// //设置为limit则会发送符合RESTFull格式的参数
+			singleSelect : false, // 设置为true将禁止多选
+			// contentType : "application/x-www-form-urlencoded",
+			// //发送到服务器的数据编码类型
+
+			//search : true, // 是否显示搜索框
+			showColumns : false, // 是否显示内容下拉框（选择显示的列）
+
+		// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
+		// queryParamsType = 'limit' ,返回参数必须包含
+		// limit, offset, search, sort, order 否则, 需要包含:
+		// pageSize, pageNumber, searchText, sortName,
+		// sortOrder.
+		// 返回false将会终止请求
+
+		});
+	}
+
+	function xhFormatter(value, row, index) {
+		return index + 1;
+	}
+</script>
+
+
+</html>

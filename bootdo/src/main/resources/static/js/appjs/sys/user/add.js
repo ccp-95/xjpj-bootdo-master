@@ -74,8 +74,11 @@ function validateRule() {
 				minlength : 6,
 				equalTo : "#password"
 			},
-			email : {
+			deptId : {
 				required : true,
+			},
+			email : {
+				required : false,
 				email : true
 			},
 			topic : {
@@ -103,7 +106,10 @@ function validateRule() {
 				minlength : icon + "密码必须6个字符以上",
 				equalTo : icon + "两次输入的密码不一致"
 			},
-			email : icon + "请输入您的E-mail",
+			deptId : {
+				required : icon + "请选择所属部门"
+			},
+			email : icon + "请输入正确的E-mail",
 		}
 	})
 }

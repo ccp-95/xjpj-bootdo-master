@@ -56,7 +56,7 @@ function load() {
 									title : '考核周期' 
 								},
 																{
-									field : 'deptId', 
+									field : 'deptName', 
 									title : '单位' 
 								},
 																{
@@ -69,7 +69,13 @@ function load() {
 								},
 																{
 									field : 'xb', 
-									title : '性别' 
+									title : '性别',
+									formatter : function(value, row, index) {
+										if(value=='1')
+											return '男';
+										else
+											return '女';
+									}
 								},
 																{
 									field : 'cheJian', 

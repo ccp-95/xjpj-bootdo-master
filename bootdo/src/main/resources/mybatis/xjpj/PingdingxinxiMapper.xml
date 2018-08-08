@@ -9,11 +9,11 @@
 
 	<select id="list" resultType="com.zztlj.xjpj.domain.PingdingxinxiDO">
 	    <include refid="pagination.Oracle_Pagination_Head" />
-		select ID,KHZQ,DEPT_ID,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ from XJPJ_PINGDINGXINXI
+		select p.ID,KHZQ,p.DEPT_ID,d.name as DEPT_NAME,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ from XJPJ_PINGDINGXINXI p left join sys_dept d on p.dept_id = d.dept_id 
         <where>  
-		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="id != null and id != ''"> and p.ID = #{id} </if>
 		  		  <if test="khzq != null and khzq != ''"> and KHZQ = #{khzq} </if>
-		  		  <if test="deptId != null and deptId != ''"> and DEPT_ID = #{deptId} </if>
+		  		  <if test="deptId != null and deptId != ''"> and p.DEPT_ID = #{deptId} </if>
 		  		  <if test="zgxm != null and zgxm != ''"> and ZGXM = #{zgxm} </if>
 		  		  <if test="nl != null and nl != ''"> and NL = #{nl} </if>
 		  		  <if test="xb != null and xb != ''"> and XB = #{xb} </if>
@@ -33,7 +33,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by ID desc
+                order by p.khzq desc,p.ID
 			</otherwise>
         </choose>
 		<include refid="pagination.Oracle_Pagination_Tail" />

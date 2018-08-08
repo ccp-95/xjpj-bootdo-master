@@ -60,7 +60,9 @@ public class PingdingxinxiController {
 	@RequiresPermissions("xjpj:pingdingxinxi:pingdingxinxi")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		UserDO  user = (UserDO) SecurityUtils.getSubject().getPrincipal();
         Query query = new Query(params);
+        query.put("deptId", user.getDeptId());
 		List<PingdingxinxiDO> pingdingxinxiList = pingdingxinxiService.list(query);
 		int total = pingdingxinxiService.count(query);
 		PageUtils pageUtils = new PageUtils(pingdingxinxiList, total);
