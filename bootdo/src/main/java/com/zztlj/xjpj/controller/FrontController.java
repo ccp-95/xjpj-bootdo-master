@@ -15,4 +15,9 @@ public class FrontController {
 	String main(){
 	    return "xjpj/front/main";
 	}
+	
+	@GetMapping("/search")
+	String search(){
+	    return "xjpj/front/search";
+	}
 }

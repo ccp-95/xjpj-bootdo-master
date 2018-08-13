@@ -11,9 +11,7 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 					<div class="site-heading">
-						<h2>
-							中国铁路郑州局集团有限公司星级职工评价系统
-							</h1>
+						<h2>中国铁路郑州局集团有限公司星级职工评价系统</h2>
 					</div>
 				</div>
 			</div>
@@ -22,6 +20,9 @@
 
 	<!-- Main Content -->
 	<div class="container">
+		<div class="row text-center">
+			<h3>2018 年 8 月份集团公司“星级职工”评定基本情况统计表</h3>
+		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 				<table id="exampleTable">
@@ -39,13 +40,16 @@
 						</tr>
 						<tr class="success">
 							<th data-field="sxrs" data-align="center">人数</th>
-							<th data-field="sxbl" data-align="center">比例</th>
+							<th data-field="sxbl" data-align="center"
+								data-formatter="blFormatter">比例</th>
 
 							<th data-field="exrs" data-align="center">人数</th>
-							<th data-field="exbl" data-align="center">比例</th>
+							<th data-field="exbl" data-align="center"
+								data-formatter="blFormatter">比例</th>
 
 							<th data-field="yxrs" data-align="center">人数</th>
-							<th data-field="yxbl" data-align="center">比例</th>
+							<th data-field="yxbl" data-align="center"
+								data-formatter="blFormatter">比例</th>
 
 						</tr>
 					</thead>
@@ -93,6 +97,11 @@
 
 	function xhFormatter(value, row, index) {
 		return index + 1;
+	}
+
+	function blFormatter(value, row, index) {
+		var bl = value.toFixed(2);
+		return bl * 100 + "%";
 	}
 </script>
 

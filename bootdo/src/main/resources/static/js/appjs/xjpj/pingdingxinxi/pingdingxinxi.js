@@ -49,7 +49,7 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '序号' 
+									title : '序号'									
 								},
 																{
 									field : 'khzq', 

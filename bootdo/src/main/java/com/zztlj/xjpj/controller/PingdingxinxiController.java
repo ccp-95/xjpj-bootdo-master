@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,17 @@ public class PingdingxinxiController {
 		UserDO  user = (UserDO) SecurityUtils.getSubject().getPrincipal();
         Query query = new Query(params);
         query.put("deptId", user.getDeptId());
+		List<PingdingxinxiDO> pingdingxinxiList = pingdingxinxiService.list(query);
+		int total = pingdingxinxiService.count(query);
+		PageUtils pageUtils = new PageUtils(pingdingxinxiList, total);
+		return pageUtils;
+	}
+	
+	@ResponseBody
+	@GetMapping("/search")
+	public PageUtils search(@RequestParam Map<String, Object> params){
+		//查询列表数据
+        Query query = new Query(params);
 		List<PingdingxinxiDO> pingdingxinxiList = pingdingxinxiService.list(query);
 		int total = pingdingxinxiService.count(query);
 		PageUtils pageUtils = new PageUtils(pingdingxinxiList, total);

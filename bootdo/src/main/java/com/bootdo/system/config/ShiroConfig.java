@@ -89,6 +89,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/front", "anon");
         filterChainDefinitionMap.put("/front/**", "anon");
         filterChainDefinitionMap.put("/xjpj/statistics/**", "anon");
+        filterChainDefinitionMap.put("/xjpj/pingdingxinxi/search", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
