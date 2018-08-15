@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.github.crab2died.annotation.ExcelField;
 import com.zztlj.xjpj.utils.PingdingxinxiXBConverter;
+import com.zztlj.xjpj.utils.PingdingxinxiXJConverter;
 
 
 
@@ -51,7 +52,7 @@ public class PingdingxinxiDO implements Serializable {
 	@ExcelField(title = "身份证号", order = 10)
 	private String sfzh;
 	//星级
-	@ExcelField(title = "星级", order = 11)
+	@ExcelField(title = "星级", order = 11,readConverter = PingdingxinxiXJConverter.class)
 	private Double xingJi;
 	//综合得分
 	@ExcelField(title = "综合得分", order = 12)

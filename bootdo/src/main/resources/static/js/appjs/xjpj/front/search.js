@@ -31,6 +31,10 @@ function load() {
 						queryParams : function(params) {
 							return {
 								// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+								deptId : $("#deptId").val(),
+								cheJian : $("#cheJian").val(),
+								banZu : $("#banZu").val(),
+								sfzh : $("#sfzh").val(),
 								limit : params.limit,
 								offset : params.offset
 							// name:$('#searchName').val(),
@@ -118,4 +122,17 @@ function load() {
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
+}
+
+var openDept = function(){
+	layer.open({
+		type:2,
+		title:"选择部门",
+		area : [ '300px', '450px' ],
+		content:"/system/sysDept/treeView"
+	})
+}
+function loadDept( deptId,deptName){
+	$("#deptId").val(deptId);
+	$("#deptName").val(deptName);
 }

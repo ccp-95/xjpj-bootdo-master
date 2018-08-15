@@ -19,16 +19,10 @@ public class PdqktjVO implements Serializable{
 	private Integer pdzgrs;
 	//三星人数
 	private Integer sxrs;
-	//三星比例
-	private Double sxbl;
 	//二星人数
 	private Integer exrs;
-	//二星比例
-	private Double exbl;
 	//一星人数
 	private Integer yxrs;
-	//一星比例
-	private Double yxbl;
 	
 	public Integer getPdzgrs() {
 		return pdzgrs;

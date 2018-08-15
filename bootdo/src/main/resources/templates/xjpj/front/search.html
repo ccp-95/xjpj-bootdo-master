@@ -6,12 +6,11 @@
 	<nav th:include="xjpj/front/include_front::nav"
 		class="navbar navbar-default navbar-custom navbar-fixed-top"></nav>
 	<header class="intro-header"
-		style="background-image: url('/img/blog/home-bg.jpg')">
+		style="background-image: url('/img/logo.png')">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-lg-offset-0 col-md-10 col-md-offset-1">
 					<div class="site-heading">
-						<h2>中国铁路郑州局集团有限公司星级职工评价系统</h2>
 					</div>
 				</div>
 			</div>
@@ -22,6 +21,34 @@
 	<div class="container">
 		<div class="row text-center">
 			<h3>星级职工评定查询平台</h3>
+		</div>
+		<div class="row">
+			<label class="col-sm-2 control-label">选择单位：</label>
+			<div class="col-sm-3">
+				<input id="deptId" name="deptId" class="hidden"
+					> <input id="deptName"
+					name="deptName" class="form-control" type="text"
+					style="cursor: pointer;" onclick="openDept()" readonly="readonly"
+					placeholder="所属部门" >
+			</div>
+			<label class="col-sm-2 control-label">车间：</label>
+			<div class="col-sm-3">
+			<input id="cheJian"
+					name="cheJian" class="form-control" type="text"	placeholder="所属车间" >
+			</div>
+			<label class="col-sm-2 control-label">班组：</label>
+			<div class="col-sm-3">
+			<input id="banZu"
+					name="banZu" class="form-control" type="text"	placeholder="所属班组" >
+			</div>
+			<label class="col-sm-2 control-label">身份证号：</label>
+			<div class="col-sm-3">
+			<input id="sfzh"
+					name="sfzh" class="form-control" type="text"	placeholder="身份证号" >
+			</div>
+			<div class="col-sm-2">
+				<button class="btn btn-success" onclick="reLoad()">查询</button>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-lg-offset-0 col-md-10 col-md-offset-1">
