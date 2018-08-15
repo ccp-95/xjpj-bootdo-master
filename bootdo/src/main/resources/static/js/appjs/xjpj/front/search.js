@@ -35,6 +35,7 @@ function load() {
 								cheJian : $("#cheJian").val(),
 								banZu : $("#banZu").val(),
 								sfzh : $("#sfzh").val(),
+								xingJi : $("#xingJi").val(),
 								limit : params.limit,
 								offset : params.offset
 							// name:$('#searchName').val(),
