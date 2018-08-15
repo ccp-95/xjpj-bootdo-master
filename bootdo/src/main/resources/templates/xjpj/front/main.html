@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<head th:include="xjpj/front/include_front::header"></head>
+<head th:include="xjpj/front/include_front::header">
+</head>
 <body>
+
 	<nav th:include="xjpj/front/include_front::nav"
 		class="navbar navbar-default navbar-custom navbar-fixed-top"></nav>
 	<header class="intro-header"
@@ -19,6 +21,14 @@
 
 	<!-- Main Content -->
 	<div class="container">
+	<div class="notice row ">
+	 <ul>
+	 <li>第1条公告第1条公告第1条公告第1条公告第1条公告第1条公告</li>
+	 <li>第2条公告第2条公告第2条公告第2条公告第2条公告第2条公告</li>
+	 <li>第3条公告第3条公告第3条公告第3条公告第3条公告第3条公告</li>
+	 <li>第4条公告第4条公告第4条公告第4条公告第4条公告第4条公告</li>
+	 </ul>
+	</div>
 		<div class="row text-center">
 			<h3>2018 年 8 月份集团公司“星级职工”评定基本情况统计表</h3>
 		</div>
@@ -58,6 +68,7 @@
 	</div>
 </body>
 <div th:include="xjpj/front/include_front::footer"></div>
+
 <script type="text/javascript">
 	var limit = 10;
 	var currentPage = 0;
@@ -65,7 +76,7 @@
 	$(function() {
 		var khzq = "201808";
 		load(khzq);
-
+		setInterval("noticeUp('.notice ul','-35px',500)", 2000);
 	});
 
 	function load(khzq) {
@@ -101,6 +112,22 @@
 	function blFormatter(value, row, index) {
 		var bl = value.toFixed(2);
 		return bl * 100 + "%";
+	}
+	
+	/*
+	* 参数说明
+	* obj : 动画的节点，本例中是ul
+	* top : 动画的高度，本例中是-35px;注意向上滚动是负数
+	* time : 动画的速度，即完成动画所用时间，本例中是500毫秒，即marginTop从0到-35px耗时500毫秒
+	* function : 回调函数，每次动画完成，marginTop归零，并把此时第一条信息添加到列表最后;
+	* 
+	*/
+	function noticeUp(obj,top,time) {
+	 $(obj).animate({
+	 marginTop: top
+	 }, time, function () {
+	 $(this).css({marginTop:"0"}).find(":first").appendTo(this);
+	 })
 	}
 </script>
 

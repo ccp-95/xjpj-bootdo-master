@@ -97,7 +97,13 @@ function load() {
 								},
 								{
 									field : 'xingJi',
-									title : '星级'
+									title : '星级',
+									formatter : function(value, row, index) {
+										if(value=='0')
+											return '失格';
+										else
+											return value;
+									}
 								},
 								{
 									field : 'zhdf',
