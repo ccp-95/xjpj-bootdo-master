@@ -150,7 +150,9 @@ public class PingdingxinxiController {
 	@ResponseBody
 	@PostMapping("/uploadExcel")
 	R upload(@RequestParam("file") MultipartFile file,@RequestParam("khzq") String khzq,HttpServletRequest request) {
-		
+		if (khzq.isEmpty()) {
+			return R.error("请先选择考核周期，再上传文件！");
+		}
 		String fileName = file.getOriginalFilename();
 		InputStream iStream;
 		try {

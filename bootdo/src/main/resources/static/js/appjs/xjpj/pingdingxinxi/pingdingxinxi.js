@@ -32,8 +32,8 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
-					           // name:$('#searchName').val(),
+								offset:params.offset,
+								zgxm:$('#searchName').val()
 					           // username:$('#searchName').val()
 							};
 						},
@@ -97,10 +97,17 @@ function load() {
 									field : 'xingJi', 
 									title : '星级',
 									formatter : function(value, row, index) {
-										if(value=='0')
+										if(value=='0'){
 											return '失格';
-										else
-											return value;
+										}
+										else{
+											var stars = '';
+											for(var i=0;i<value;i++){
+												stars += '<span class="glyphicon glyphicon-star"></span>';
+											}
+											return stars;
+											//return '<span class="glyphicon glyphicon-star"></span>';
+										}
 									}
 								},
 																{
@@ -152,7 +159,7 @@ function importExcel() {
 		title : '导入',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
+		area : [ '480px', '480px' ],
 		content : prefix + '/importExcel' // iframe的url
 	});
 }

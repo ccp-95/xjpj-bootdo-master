@@ -98,11 +98,19 @@ function load() {
 								{
 									field : 'xingJi',
 									title : '星级',
+			                        width:80,
 									formatter : function(value, row, index) {
-										if(value=='0')
+										if(value=='0'){
 											return '失格';
-										else
-											return value;
+										}
+										else{
+											var stars = '';
+											for(var i=0;i<value;i++){
+												stars += '<span class="glyphicon glyphicon-star"></span>';
+											}
+											return stars;
+											//return '<span class="glyphicon glyphicon-star"></span>';
+										}
 									}
 								},
 								{
