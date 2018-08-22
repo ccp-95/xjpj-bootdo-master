@@ -58,6 +58,10 @@ public class PingdingxinxiController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		UserDO  user = (UserDO) SecurityUtils.getSubject().getPrincipal();
+		Long useId = user.getDeptId();
+		if (useId == null) {
+			return null;
+		}
         Query query = new Query(params);
         query.put("deptId", user.getDeptId());
 		List<PingdingxinxiDO> pingdingxinxiList = pingdingxinxiService.list(query);

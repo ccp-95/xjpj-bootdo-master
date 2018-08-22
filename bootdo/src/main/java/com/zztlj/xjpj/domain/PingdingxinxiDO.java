@@ -86,7 +86,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：考核周期
 	 */
 	public void setKhzq(String khzq) {
-		this.khzq = khzq;
+		this.khzq = khzq.trim();
 	}
 	/**
 	 * 获取：考核周期
@@ -110,13 +110,13 @@ public class PingdingxinxiDO implements Serializable {
 		return deptName;
 	}
 	public void setDeptName(String deptName) {
-		this.deptName = deptName;
+		this.deptName = deptName.trim();
 	}
 	/**
 	 * 设置：职工姓名
 	 */
 	public void setZgxm(String zgxm) {
-		this.zgxm = zgxm;
+		this.zgxm = zgxm.trim();
 	}
 	/**
 	 * 获取：职工姓名
@@ -140,7 +140,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：性别 0：女 1：男
 	 */
 	public void setXb(String xb) {
-		this.xb = xb;
+		this.xb = xb.trim();
 	}
 	/**
 	 * 获取：性别 0：女 1：男
@@ -152,7 +152,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：车间
 	 */
 	public void setCheJian(String cheJian) {
-		this.cheJian = cheJian;
+		this.cheJian = cheJian.trim();
 	}
 	/**
 	 * 获取：车间
@@ -164,7 +164,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：班组
 	 */
 	public void setBanZu(String banZu) {
-		this.banZu = banZu;
+		this.banZu = banZu.trim();
 	}
 	/**
 	 * 获取：班组
@@ -176,7 +176,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：岗位
 	 */
 	public void setGangWei(String gangWei) {
-		this.gangWei = gangWei;
+		this.gangWei = gangWei.trim();
 	}
 	/**
 	 * 获取：岗位
@@ -188,7 +188,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：身份证号
 	 */
 	public void setSfzh(String sfzh) {
-		this.sfzh = sfzh;
+		this.sfzh = sfzh.trim();
 	}
 	/**
 	 * 获取：身份证号

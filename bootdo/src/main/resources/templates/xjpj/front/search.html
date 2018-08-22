@@ -22,53 +22,58 @@
 			<h3>星级职工评定查询平台</h3>
 		</div>
 		<div class="fixed-table-toolbar">
-		<div class="row">
-			<div class="col-sm-4 form-inline">
-				<label class="control-label">选择单位：</label> 
-				<input id="deptId" name="deptId" class="hidden">
-				<input id="deptName" name="deptName" class="form-control" type="text"
-					style="cursor: pointer;" onclick="openDept()" readonly="readonly"
-					placeholder="所属部门">
-			</div>
-			<div class="col-sm-4 form-inline">
-				<label class="control-label form-inline">车间：</label> <input
-					id="cheJian" name="cheJian" class="form-control" type="text"
-					placeholder="所属车间">
-			</div>
-			<div class="col-sm-4 form-inline">
-				<label class="control-label form-inline">班组：</label> <input
-					id="banZu" name="banZu" class="form-control" type="text"
-					placeholder="所属班组">
-			</div>
+			<div class="row">
+				<div class="col-sm-4 form-inline">
+					<label class="control-label">单位：</label> <input id="deptId"
+						name="deptId" class="hidden"> <input id="deptName"
+						name="deptName" class="form-control" type="text"
+						style="cursor: pointer;" onclick="openDept()" readonly="readonly"
+						placeholder="所属部门">
+				</div>
+				<div class="col-sm-4 form-inline">
+					<label class="control-label form-inline">所属车间：</label> <input
+						id="cheJian" name="cheJian" class="form-control" type="text"
+						placeholder="所属车间">
+				</div>
+				<div class="col-sm-4 form-inline">
+					<label class="control-label form-inline">班组：</label> <input
+						id="banZu" name="banZu" class="form-control" type="text"
+						placeholder="所属班组">
+				</div>
 
-		</div>
-		<div class="row">
-			<div class="col-sm-4 form-inline">
-			<label class="control-label">身份证号：</label>
-				<input id="sfzh" name="sfzh" class="form-control" type="text"
-					placeholder="身份证号">
 			</div>
+			<div class="row">
 			<div class="col-sm-4 form-inline">
-			<label class="control-label">星級： </label>
-				<select id="xingJi" name="xingJi" class="form-control">
-					<option value="">-全部-</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option value="0">失格</option>
-				</select>
+					<label class="control-label">岗位：</label> <input id="gangWei"
+						name="gangWei" class="form-control" type="text" placeholder="岗位">
+				</div>
+				<div class="col-sm-4 form-inline">
+					<label class="control-label">身份证号：</label> <input id="sfzh"
+						name="sfzh" class="form-control" type="text" placeholder="身份证号">
+				</div>
+				<div class="col-sm-4 form-inline">
+					<label class="control-label">星級： </label> <select id="xingJi"
+						name="xingJi" class="form-control">
+						<option value="">-全部-</option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option value="0">失格</option>
+					</select>
+				</div>
+
+				
 			</div>
-			<div class="col-sm-4 form-inline">
+			<div class="row form-inline	col-sm-12">
 				<button class="btn btn-primary" onclick="reLoad()" type="button">查询</button>
 				<button class="btn btn-success" onclick="reset()" type="button">重置</button>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-lg-offset-0 col-md-10 col-md-offset-1">
-				<table id="exampleTable" data-mobile-responsive="true">
+				<table id="exampleTable">
 				</table>
 			</div>
-		</div>
 		</div>
 	</div>
 </body>

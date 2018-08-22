@@ -76,7 +76,7 @@ hr.small {
     color: rgba(255, 255, 255, 0.8);
   }
   .navbar-custom .nav li a {
-    color: white;
+    color: #222;
     padding: 20px;
   }
   .navbar-custom .nav li a:hover,
@@ -151,7 +151,7 @@ hr.small {
   .intro-header .site-heading,
   .intro-header .post-heading,
   .intro-header .page-heading {
-    padding: 150px 0;
+    padding: 112px 0;
   }
 }
 .intro-header .site-heading,
@@ -218,7 +218,7 @@ hr.small {
   color: #0085a1;
 }
 .post-preview > a > .post-title {
-  font-size: 30px;
+  font-size: 16px;
   margin-top: 30px;
   margin-bottom: 10px;
 }
@@ -231,7 +231,8 @@ hr.small {
   color: #808080;
   font-size: 18px;
   font-style: italic;
-  margin-top: 0;
+  margin-top: -30px;
+  float:right;
 }
 .post-preview > .post-meta > a {
   text-decoration: none;
@@ -244,7 +245,7 @@ hr.small {
 }
 @media only screen and (min-width: 768px) {
   .post-preview > a > .post-title {
-    font-size: 36px;
+    font-size: 24px;
   }
 }
 .section-heading {
@@ -391,4 +392,20 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #0085a1;
+}
+
+.notice{ width:720px; height:35px; border-bottom:1px solid #69F; padding:0 55px;overflow: hidden;}
+.notice-title{ color:#333; background:url('/img/notice_icon.png') no-repeat; background-size:28px auto; height:30px; padding-left:34px;padding-top:5px; }
+.notice-content{ position:relative; width:720px; height:30px; white-space:nowrap; overflow:hidden; float:left; margin-left:30px; margin-top:-30px; }
+.notice-text{ color:red; font-size:14px; position:absolute;}
+
+p,ul,li{margin: 0;padding: 0}/*先初始化一下默认样式*/
+.notice ul li {
+ list-style: none;
+ line-height: 35px;
+ /*以下为了单行显示，超出隐藏*/
+ display: block;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+ overflow: hidden;
 }

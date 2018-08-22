@@ -56,4 +56,19 @@ public class BlogController {
 		model.addAttribute("bContent", bContentDO);
 		return "blog/index/post";
 	}
+	@GetMapping("/open/categories/{categories}")
+	String openCategories(@PathVariable("categories") String categories, Model model) {
+		model.addAttribute("categories", categories);
+		return "blog/index/categories";
+	}
+	
+	@ResponseBody
+	@GetMapping("/list/{categories}")
+	public List<ContentDO> listByType(@PathVariable("categories") String categories) {
+		// 查询列表数据
+		Map<String, Object> map = new HashMap<>(16);
+		map.put("categories", categories);
+		List<ContentDO> blogList = bContentService.list(map);
+		return blogList;
+	}
 }

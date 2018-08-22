@@ -46,6 +46,7 @@ public class DictController extends BaseController {
 		PageUtils pageUtils = new PageUtils(dictList, total);
 		return pageUtils;
 	}
+	
 
 	@GetMapping("/add")
 	@RequiresPermissions("common:dict:add")

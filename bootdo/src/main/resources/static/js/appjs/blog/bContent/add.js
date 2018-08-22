@@ -1,17 +1,32 @@
-$().ready(function() {
+$().ready(
+		function() {
 
-	$('.summernote').summernote({
-		height : '220px',
-		lang : 'zh-CN',
-		callbacks: {
-            onImageUpload: function(files, editor, $editable) {
-                sendFile(files);
-            }
-        }
-	});
-	validateRule();
-});
+			$('.summernote').summernote({
+				height : '220px',
+				lang : 'zh-CN',
+				callbacks : {
+					onImageUpload : function(files, editor, $editable) {
+						sendFile(files);
+					}
+				}
+			});
+			validateRule();
 
+			$.ajax({
+				// get请求地址
+				url : "/common/dict/list/blog_type",
+				dataType : "json",
+				success : function(data) {
+					var optArr = [];
+					for (var i = 0; i < data.length; i++) {
+						$('.selectpicker').append(
+								"<option value=" + data[i].value + ">"
+										+ data[i].name + "</option>");
+					}
+
+				}
+			});
+		});
 
 $.validator.setDefaults({
 	submitHandler : function() {
@@ -36,7 +51,8 @@ function save(status) {
 				parent.layer.msg(r.msg);
 				parent.reLoad();
 				$("#cid").val(r.cid);
-
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
 			} else {
 				parent.layer.alert(r.msg)
 			}
@@ -48,12 +64,10 @@ function validateRule() {
 	$("#signupForm").validate({
 		rules : {
 			title : "required",
-			author : "required",
 			content : "required"
 		},
 		messages : {
 			title : "请填写文章标题",
-			author : "请填写文章作者",
 			content : "请填写文章内容"
 		}
 	});

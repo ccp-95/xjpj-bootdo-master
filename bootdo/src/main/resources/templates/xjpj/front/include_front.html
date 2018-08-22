@@ -4,6 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<!--[if lt IE 9]>
+       <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
 <title>星级职工评价信息系统</title>
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
@@ -77,24 +81,8 @@
 	    border-radius: 50%;
 	    opacity: .5;
 	}
-	
-p,ul,li{margin: 0;padding: 0}/*先初始化一下默认样式*/
-.notice {
- 
- height: 35px;/*固定公告栏显示区域的高度*/
- padding: 0 30px;
- background-color: #b3effe;
- overflow: hidden;
-}
-.notice ul li {
- list-style: none;
- line-height: 35px;
- /*以下为了单行显示，超出隐藏*/
- display: block;
- white-space: nowrap;
- text-overflow: ellipsis;
- overflow: hidden;
-}
+  }
+
 </style>
 </head>
 <nav th:fragment="nav">
@@ -112,9 +100,7 @@ p,ul,li{margin: 0;padding: 0}/*先初始化一下默认样式*/
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/">主页</a></li>
 				<li><a href="/front/search">查询详情</a></li>
-				<li><a href="/blog/open/page/about">关于</a></li>
-				<li><a href="/blog/open/page/communication">交流</a></li>
-				<li><a href="/login">登录</a></li>
+				<li><a href="/login">管理登录</a></li>
 			</ul>
 		</div>
 	</div>

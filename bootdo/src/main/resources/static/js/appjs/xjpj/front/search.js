@@ -12,14 +12,12 @@ function load() {
 						// showRefresh : true,
 						// showToggle : true,
 						// showColumns : true,
-						iconSize : 'outline',
-						toolbar : '#exampleToolbar',
-						striped : true, // 设置为true会有隔行变色效果
+						striped : false, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
 						pagination : true, // 设置为true会在底部显示分页条
 						// queryParamsType : "limit",
 						// //设置为limit则会发送符合RESTFull格式的参数
-						singleSelect : false, // 设置为true将禁止多选
+						singleSelect : true, // 设置为true将禁止多选
 						// contentType : "application/x-www-form-urlencoded",
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
@@ -36,6 +34,7 @@ function load() {
 								banZu : $("#banZu").val(),
 								sfzh : $("#sfzh").val(),
 								xingJi : $("#xingJi").val(),
+								gangWei : $("#gangWei").val(),
 								limit : params.limit,
 								offset : params.offset
 							// name:$('#searchName').val(),
@@ -59,11 +58,13 @@ function load() {
 								},
 								{
 									field : 'deptName',
-									title : '单位'
+									title : '单位',
+									width : '10%'
 								},
 								{
 									field : 'zgxm',
-									title : '职工姓名'
+									title : '姓名',
+									width : '8%'
 								},
 								{
 									field : 'nl',
@@ -89,7 +90,8 @@ function load() {
 								},
 								{
 									field : 'gangWei',
-									title : '岗位'
+									title : '岗位',
+									width : '8%'
 								},
 								{
 									field : 'sfzh',
@@ -98,7 +100,7 @@ function load() {
 								{
 									field : 'xingJi',
 									title : '星级',
-			                        width:80,
+									width : '10%',
 									formatter : function(value, row, index) {
 										if(value=='0'){
 											return '失格';
@@ -137,6 +139,17 @@ function load() {
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
+}
+
+function reset(){
+	$("#deptId").val(null);
+	$("#deptName").val("");
+	
+	$("#cheJian").val("");
+	$("#banZu").val("");
+	$("#gangWei").val("");
+	$("#sfzh").val("");
+	$("#xingJi").val("");
 }
 
 var openDept = function(){
