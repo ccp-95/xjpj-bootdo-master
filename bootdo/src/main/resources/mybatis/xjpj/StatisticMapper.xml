@@ -4,7 +4,7 @@
 <mapper namespace="com.zztlj.xjpj.dao.StatisticDao">
 
 	<select id="calcPdqktj" resultType="com.zztlj.xjpj.domain.PdqktjVO">
-		select d.name as deptName,count(sfzh) as pdzgrs,
+		select #{value} as khzq,d.name as deptName,count(sfzh) as pdzgrs,
 		(select count(sfzh) from xjpj_pingdingxinxi p1 where p1.khzq=#{value} and
 		p1.xing_ji=3 and p1.dept_id=p.dept_id) as sxrs,
 		(select count(sfzh) from xjpj_pingdingxinxi p1 where p1.khzq=#{value} and

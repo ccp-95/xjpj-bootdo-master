@@ -13,6 +13,8 @@ import java.io.Serializable;
 public class PdqktjVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	//考核周期
+	private String khzq;
 	//单位名称
 	private String deptName;
 	//评定职工人数
@@ -24,6 +26,12 @@ public class PdqktjVO implements Serializable{
 	//一星人数
 	private Integer yxrs;
 	
+	public String getKhzq() {
+		return khzq;
+	}
+	public void setKhzq(String khzq) {
+		this.khzq = khzq;
+	}
 	public Integer getPdzgrs() {
 		return pdzgrs;
 	}

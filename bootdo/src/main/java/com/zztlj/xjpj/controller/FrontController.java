@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/front")
 public class FrontController {
 	
-	@GetMapping()
-	String main(){
+	@GetMapping("")
+	String index(){
 	    return "xjpj/front/main";
 	}
 	

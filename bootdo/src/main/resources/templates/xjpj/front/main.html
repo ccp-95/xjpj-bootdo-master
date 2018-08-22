@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="row text-center">
-			<h3>2018 年 8 月份集团公司“星级职工”评定基本情况统计表</h3>
+			<h3 id="tblTitle"></h3>
 		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -75,8 +75,7 @@
 	var currentPage = 0;
 	var total;
 	$(function() {
-		var khzq = "201808";
-		load(khzq);
+		load();
 		$.ajax({
 			// get请求地址
 			url : "/blog/list/notice",
@@ -93,29 +92,25 @@
 		setInterval("noticeUp('.notice ul','-35px',500)", 2000);
 	});
 
-	function load(khzq) {
+	function load() {
 		$('#exampleTable').bootstrapTable({
 			method : 'get', // 服务器数据的请求方式 get or post
-			url : 'xjpj/statistics/pdqktj?khzq=' + khzq, // 服务器数据的加载地址
+			url : '/xjpj/statistics/pdqktj', // 服务器数据的加载地址
 			striped : false, // 设置为true会有隔行变色效果
 			dataType : "json", // 服务器返回的数据类型
 			pagination : false, // 设置为true会在底部显示分页条
-			// queryParamsType : "limit",
-			// //设置为limit则会发送符合RESTFull格式的参数
-			singleSelect : true, // 设置为true将禁止多选
-			// contentType : "application/x-www-form-urlencoded",
-			// //发送到服务器的数据编码类型
-
-			//search : true, // 是否显示搜索框
-			showColumns : false, // 是否显示内容下拉框（选择显示的列）
-
-		// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
-		// queryParamsType = 'limit' ,返回参数必须包含
-		// limit, offset, search, sort, order 否则, 需要包含:
-		// pageSize, pageNumber, searchText, sortName,
-		// sortOrder.
-		// 返回false将会终止请求
-
+			onLoadSuccess:function(data){
+				var title = '';
+				if(data != null && data.length>0){
+					var year = data[0].khzq.substring(0,4);
+					var month = data[0].khzq.substring(4,6);
+					title +=year+'年'+month+'月份集团公司“星级职工”评定基本情况统计表';
+					
+				}
+				$('#tblTitle').append(title);
+				
+			}
+			
 		});
 	}
 
