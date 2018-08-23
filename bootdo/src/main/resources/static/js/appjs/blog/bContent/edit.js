@@ -12,6 +12,28 @@ $().ready(function() {
 	var content = $("#content").val();
 
 	$('#content_sn').summernote('code', content);
+	$.ajax({
+		// get请求地址
+		url : "/common/dict/list/blog_type",
+		dataType : "json",
+		success : function(data) {
+			var optArr = [];
+			for (var i = 0; i < data.length; i++) {
+				if(oldCategories == data[i].value){
+					$('.selectpicker').append(
+							"<option selected='selected' value=" + data[i].value + ">"
+									+ data[i].name + "</option>");
+				}
+				else{
+					$('.selectpicker').append(
+							"<option value=" + data[i].value + ">"
+									+ data[i].name + "</option>");
+				}
+				
+			}
+
+		}
+	});
 	validateRule();
 });
 

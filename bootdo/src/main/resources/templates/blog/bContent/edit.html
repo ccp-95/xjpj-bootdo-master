@@ -39,8 +39,9 @@
 							<div class="form-group">
 								<label class="col-sm-1 control-label">类型：</label>
 								<div class="col-sm-11">
-									<input th:value="${bContent.categories}" id="categories"
-										name="categories" class="form-control" type="text">
+									<!-- <input th:value="${bContent.categories}" id="categories"
+										name="categories" class="form-control" type="text"> -->
+										<select id="categories" name="categories" class="form-control selectpicker"></select>
 								</div>
 							</div>
 							<div class="form-group">
@@ -88,6 +89,11 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var oldCategories = /*[[${bContent.categories}]]*/;
+			/*]]>*/
+	</script>
 	<script type="text/javascript" src="/js/appjs/blog/bContent/edit.js">
 		
 	</script>
