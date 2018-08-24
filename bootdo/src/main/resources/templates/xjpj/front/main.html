@@ -21,7 +21,7 @@
 	<!-- Main Content -->
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<div class="col-lg-10 col-lg-offset-1 col-md-12">
 				<div class="notice-title">公告：</div>
 				<div class="notice notice-content">
 					<ul id="ul_notice">
@@ -34,14 +34,16 @@
 			<h3 id="tblTitle"></h3>
 		</div>
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<div class="col-lg-10 col-lg-offset-1 col-md-12">
 				<table id="exampleTable">
 					<thead>
 						<tr>
 							<th data-formatter="xhFormatter" rowspan="2" data-valign="middle"
 								data-align="center">序号</th>
+							<th data-field="deptId" rowspan="2" data-valign="middle"
+								data-align="center" data-visible="false">单位ID</th>
 							<th data-field="deptName" rowspan="2" data-valign="middle"
-								data-align="center">单位</th>
+								data-align="center" data-formatter="dwFormatter">单位</th>
 							<th data-field="pdzgrs" rowspan="2" data-valign="middle"
 								data-align="center">参与职工人数</th>
 							<th colspan="2" data-valign="middle" data-align="center">三星级<img src="/img/star.jpg" height="24" width="26" /><img src="/img/star.jpg" height="24" width="26" /><img src="/img/star.jpg" height="24" width="26" /></th>
@@ -49,15 +51,16 @@
 							<th colspan="2" data-valign="middle" data-align="center">一星级<img src="/img/star.jpg" height="24" width="26" /></th>
 						</tr>
 						<tr>
-							<th data-field="sxrs" data-align="center" style="border-left:1 solid black">人数</th>
+							<th data-field="sxrs" data-align="center" data-formatter="sxrsFormatter"
+							style="border-left:1 solid black">人数</th>
 							<th data-field="sxbl" data-align="center"
 								data-formatter="blFormatter">比例</th>
 
-							<th data-field="exrs" data-align="center">人数</th>
+							<th data-field="exrs" data-align="center" data-formatter="exrsFormatter">人数</th>
 							<th data-field="exbl" data-align="center"
 								data-formatter="blFormatter">比例</th>
 
-							<th data-field="yxrs" data-align="center">人数</th>
+							<th data-field="yxrs" data-align="center" data-formatter="yxrsFormatter">人数</th>
 							<th data-field="yxbl" data-align="center"
 								data-formatter="blFormatter">比例</th>
 
@@ -114,12 +117,38 @@
 		});
 	}
 
+	function dwFormatter(value, row, index) {
+		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+value+"'>"+value+"</a>";
+		return a;
+	}
+	
+	function sxrsFormatter(value, row, index) {
+		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
+				+"&xingJi="+3
+				+"'>"
+				+value+"</a>";
+		return a;
+	}
+	function exrsFormatter(value, row, index) {
+		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
+				+"&xingJi="+2
+				+"'>"
+				+value+"</a>";
+		return a;
+	}
+	function yxrsFormatter(value, row, index) {
+		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
+				+"&xingJi="+1
+				+"'>"
+				+value+"</a>";
+		return a;
+	}
 	function xhFormatter(value, row, index) {
 		return index + 1;
 	}
 
 	function blFormatter(value, row, index) {
-		var bl = value.toFixed(2);
+		var bl = parseFloat(value).toFixed(2);
 		return bl * 100 + "%";
 	}
 

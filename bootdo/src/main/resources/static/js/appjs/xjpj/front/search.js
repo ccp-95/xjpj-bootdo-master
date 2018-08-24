@@ -59,7 +59,7 @@ function load() {
 								{
 									field : 'deptName',
 									title : '单位',
-									width : '10%'
+									width : '12%'
 								},
 								{
 									field : 'zgxm',

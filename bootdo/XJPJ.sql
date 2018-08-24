@@ -98,3 +98,15 @@ alter table SYS_FILE add ORIGINAL_NAME NVARCHAR2(200);
 comment on column SYS_FILE.ORIGINAL_NAME
   is '原始文件名';
 
+-- Alter table 
+alter table SYS_DEPT
+  storage
+  (
+    next 1
+  )
+;
+-- Add/modify columns 
+alter table SYS_DEPT add TYPE NUMBER(4);
+-- Add comments to the columns 
+comment on column SYS_DEPT.TYPE
+  is '0:根节点 1:系统 2:单位 3:部门';

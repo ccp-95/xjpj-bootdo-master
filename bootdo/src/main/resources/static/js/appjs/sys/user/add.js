@@ -77,6 +77,9 @@ function validateRule() {
 			deptId : {
 				required : true,
 			},
+			deptName : {
+				required : true,
+			},
 			email : {
 				required : false,
 				email : true
@@ -107,6 +110,9 @@ function validateRule() {
 				equalTo : icon + "两次输入的密码不一致"
 			},
 			deptId : {
+				required : icon + "请选择所属部门"
+			},
+			deptName : {
 				required : icon + "请选择所属部门"
 			},
 			email : icon + "请输入正确的E-mail",

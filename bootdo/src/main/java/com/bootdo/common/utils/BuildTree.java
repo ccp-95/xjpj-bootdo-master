@@ -47,7 +47,7 @@ public class BuildTree {
 			root.setChildren(true);
 			root.setChecked(true);
 			root.setChildren(topNodes);
-			root.setText("顶级节点");
+			root.setText("中国铁路郑州局集团有限公司");
 			Map<String, Object> state = new HashMap<>(16);
 			state.put("opened", true);
 			root.setState(state);

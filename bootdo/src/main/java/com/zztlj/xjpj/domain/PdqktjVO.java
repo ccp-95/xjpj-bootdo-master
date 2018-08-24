@@ -15,6 +15,8 @@ public class PdqktjVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//考核周期
 	private String khzq;
+	//单位ID
+	private String deptId;
 	//单位名称
 	private String deptName;
 	//评定职工人数
@@ -26,6 +28,20 @@ public class PdqktjVO implements Serializable{
 	//一星人数
 	private Integer yxrs;
 	
+	
+
+	public String getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 	public String getKhzq() {
 		return khzq;
 	}
@@ -56,19 +72,22 @@ public class PdqktjVO implements Serializable{
 	public void setYxrs(Integer yxrs) {
 		this.yxrs = yxrs;
 	}
-	public String getDeptName() {
-		return deptName;
-	}
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
 	public Double getSxbl() {
+		if (this.pdzgrs<=0) {
+			return 0.0;
+		}
 		return (double)this.sxrs/this.pdzgrs;
 	}
 	public Double getExbl() {
+		if (this.pdzgrs<=0) {
+			return 0.0;
+		}
 		return (double)this.exrs/this.pdzgrs;
 	}
 	public Double getYxbl() {
+		if (this.pdzgrs<=0) {
+			return 0.0;
+		}
 		return (double)this.yxrs/this.pdzgrs;
 	}
 }

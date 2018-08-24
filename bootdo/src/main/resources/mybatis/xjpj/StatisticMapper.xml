@@ -4,16 +4,19 @@
 <mapper namespace="com.zztlj.xjpj.dao.StatisticDao">
 
 	<select id="calcPdqktj" resultType="com.zztlj.xjpj.domain.PdqktjVO">
-		select #{value} as khzq,d.name as deptName,count(sfzh) as pdzgrs,
+		select #{value} as khzq,d.dept_id as deptId,d.name as deptName,
+		(select count(sfzh) from xjpj_pingdingxinxi p0 where p0.khzq=#{value} and 
+		p0.dept_id=d.dept_id)
+		as pdzgrs,
 		(select count(sfzh) from xjpj_pingdingxinxi p1 where p1.khzq=#{value} and
-		p1.xing_ji=3 and p1.dept_id=p.dept_id) as sxrs,
+		p1.xing_ji=3 and p1.dept_id=d.dept_id) as sxrs,
 		(select count(sfzh) from xjpj_pingdingxinxi p1 where p1.khzq=#{value} and
-		p1.xing_ji=2 and p1.dept_id=p.dept_id) as exrs,
+		p1.xing_ji=2 and p1.dept_id=d.dept_id) as exrs,
 		(select count(sfzh) from xjpj_pingdingxinxi p1 where p1.khzq=#{value} and
-		p1.xing_ji=1 and p1.dept_id=p.dept_id) as yxrs
-		from xjpj_pingdingxinxi p left join sys_dept d on p.dept_id = d.dept_id
-		where p.khzq=#{value}
-		group by p.dept_id,d.name,d.order_num
+		p1.xing_ji=1 and p1.dept_id=d.dept_id) as yxrs
+		from sys_dept d left join xjpj_pingdingxinxi p on d.dept_id=p.dept_id
+		where d.type=2 
+		group by d.dept_id,d.name,d.order_num
 		order by d.order_num
 	</select>
 
