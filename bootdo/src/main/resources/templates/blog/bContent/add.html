@@ -20,11 +20,16 @@
 								<div class="col-sm-4">
 									<input id="title" name="title" class="form-control" type="text">
 								</div>
-								<label class="col-sm-1 control-label">作者：</label>
+								<label class="col-sm-1 control-label">类型：</label>
+								<div class="col-sm-4">
+									<!-- <input id="categories" name="categories" class="form-control" type="text"> -->
+									<select id="categories" name="categories" class="form-control selectpicker"></select>
+								</div>
+								<!-- <label class="col-sm-1 control-label">作者：</label>
 								<div class="col-sm-4">
 									<input id="author" name="author" class="form-control"
 										type="text">
-								</div>
+								</div> -->
 							</div>
 							<div class="form-group">
 								<input id="content" name="content" type="hidden"> <label
@@ -35,15 +40,15 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label class="col-sm-1 control-label">类型：</label>
 								<div class="col-sm-11">
-									<!-- <input id="categories" name="categories" class="form-control" type="text"> -->
+									<input id="categories" name="categories" class="form-control" type="text">
 									<select id="categories" name="categories" class="form-control selectpicker"></select>
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">开启评论：</label>
+								<!-- <label class="col-sm-2 control-label">开启评论：</label>
 								<div class="switch onoffswitch col-sm-1">
 									<div class="onoffswitch">
 										<input id="allowComment" name="allowComment" type="checkbox" value="1" class="onoffswitch-checkbox"
@@ -64,7 +69,13 @@
 											class="onoffswitch-switch"></span>
 										</label>
 									</div>
+								</div> -->
+								<div class="col-sm-12">
+									<button id="btnUpload" type="button"
+										class="btn btn-success waves-effect waves-light">上传附件</button>
+									<div id="attatchList"></div>
 								</div>
+								<input id="attatch" name="attatch" type="hidden">
 								<input id="status" name="status" type="hidden">
 							</div>
 							<div class="text-right form-group">
@@ -83,8 +94,6 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-
-
 	<script type="text/javascript" src="/js/appjs/blog/bContent/add.js">
 		
 	</script>

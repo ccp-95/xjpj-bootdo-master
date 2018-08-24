@@ -4,9 +4,13 @@ import com.bootdo.blog.domain.ContentDO;
 import com.bootdo.blog.service.ContentService;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.domain.AttatchmentDO;
+import com.bootdo.common.service.AttatchmentService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.common.vo.AttatchmentVO;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +33,8 @@ import java.util.Map;
 public class ContentController extends BaseController {
 	@Autowired
     ContentService bContentService;
+	@Autowired
+	private AttatchmentService attatchmentService;
 
 	@GetMapping()
 	@RequiresPermissions("blog:bContent:bContent")
@@ -58,6 +64,17 @@ public class ContentController extends BaseController {
 	String edit(@PathVariable("cid") Long cid, Model model) {
 		ContentDO bContentDO = bContentService.get(cid);
 		model.addAttribute("bContent", bContentDO);
+		
+		// 添加附件
+		List<AttatchmentVO> attatchList = attatchmentService.listAttatchmentByCid(cid);
+		model.addAttribute("attatchList",attatchList);
+		
+		String fidStr = "";
+		for (AttatchmentVO attatchmentVO : attatchList) {
+			fidStr += attatchmentVO.getFileDO().getId()+",";
+		}
+		
+		model.addAttribute("fidStr",fidStr);
 		return "blog/bContent/edit";
 	}
 
@@ -67,7 +84,7 @@ public class ContentController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("blog:bContent:add")
 	@PostMapping("/save")
-	public R save(ContentDO bContent) {
+	public R save(ContentDO bContent,@RequestParam("attatch") String attatch) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
@@ -87,6 +104,14 @@ public class ContentController extends BaseController {
 			count = bContentService.save(bContent);
 		} else {
 			count = bContentService.update(bContent);
+		}
+		// 添加或更新附件
+		String[] attatchList = attatch.split(",");
+		attatchmentService.removeByCid(bContent.getCid());
+		for (String fid : attatchList) {
+			if(fid.isEmpty()) continue;
+			AttatchmentDO attatchmentDO = new AttatchmentDO(bContent.getCid(), Long.parseLong(fid));
+			attatchmentService.save(attatchmentDO);
 		}
 		if (count > 0) {
 			return R.ok().put("cid", bContent.getCid());

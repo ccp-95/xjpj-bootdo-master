@@ -57,3 +57,44 @@ create sequence SEQ_XJPJ_PINGDINGXINXI
 start with 100
 increment by 1
 nocache;
+
+
+
+-- Create table
+create table BLOG_ATTATCHMENT
+(
+  ID  number,
+  cid number,
+  fid number
+)
+;
+-- Add comments to the table 
+comment on table BLOG_ATTATCHMENT
+  is '文章附件';
+-- Add comments to the columns 
+comment on column BLOG_ATTATCHMENT.ID
+  is '序号';
+comment on column BLOG_ATTATCHMENT.cid
+  is '文章ID';
+comment on column BLOG_ATTATCHMENT.fid
+  is '文件ID';
+
+  -- Create sequence 
+create sequence SEQ_BLOG_ATTATCHMENT
+start with 100
+nocache;
+
+
+-- Alter table 
+alter table SYS_FILE
+  storage
+  (
+    next 1
+  )
+;
+-- Add/modify columns 
+alter table SYS_FILE add ORIGINAL_NAME NVARCHAR2(200);
+-- Add comments to the columns 
+comment on column SYS_FILE.ORIGINAL_NAME
+  is '原始文件名';
+

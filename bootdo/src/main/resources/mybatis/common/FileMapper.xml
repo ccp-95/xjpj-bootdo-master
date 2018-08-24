@@ -4,17 +4,18 @@
 <mapper namespace="com.bootdo.common.dao.FileDao">
 
 	<select id="get" resultType="com.bootdo.common.domain.FileDO">
-		select id,type,url,create_date from sys_file where id = #{value,jdbcType=NUMERIC}
+		select id,type,url,create_date,original_name from sys_file where id = #{value,jdbcType=NUMERIC}
 	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.FileDO">
 		<include refid="pagination.Oracle_Pagination_Head" />
-		select id,type,url,create_date from sys_file
+		select id,type,url,create_date,original_name from sys_file
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="url != null and url != ''"> and url = #{url} </if>
 		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="originalName != null and originalName != ''"> and original_name = #{originalName} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -34,6 +35,7 @@
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="url != null and url != ''"> and url = #{url} </if>
 		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="originalName != null and originalName != ''"> and original_name = #{originalName} </if>
 		  		</where>
 	</select>
 	 
@@ -46,14 +48,16 @@
 			ID, 
 			TYPE, 
 			URL, 
-			CREATE_DATE
+			CREATE_DATE,
+			ORIGINAL_NAME
 		)
 		values
 		(
 			#{id,jdbcType=NUMERIC}, 		
 			#{type,jdbcType=NUMERIC}, 		
 			#{url,jdbcType=VARCHAR}, 		
-			#{createDate,jdbcType=DATE}		
+			#{createDate,jdbcType=DATE},
+			#{originalName,jdbcType=VARCHAR}				
 		)
 	</insert>
 	 
@@ -63,6 +67,7 @@
 			<if test="type != null">type = #{type}, </if>
 			<if test="url != null">url = #{url}, </if>
 			<if test="createDate != null">create_date = #{createDate}</if>
+			<if test="originalName != null and originalName != ''"> and original_name = #{originalName} </if>
 		</set>
 		where id = #{id}
 	</update>

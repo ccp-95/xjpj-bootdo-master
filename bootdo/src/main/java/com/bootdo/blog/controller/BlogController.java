@@ -2,9 +2,12 @@ package com.bootdo.blog.controller;
 
 import com.bootdo.blog.domain.ContentDO;
 import com.bootdo.blog.service.ContentService;
+import com.bootdo.common.service.AttatchmentService;
 import com.bootdo.common.utils.DateUtils;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
+import com.bootdo.common.vo.AttatchmentVO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +25,9 @@ import java.util.Map;
 public class BlogController {
 	@Autowired
     ContentService bContentService;
+	
+	@Autowired
+    AttatchmentService attatchmentService;
 
 	@GetMapping()
 	String blog() {
@@ -43,6 +49,9 @@ public class BlogController {
 		ContentDO bContentDO = bContentService.get(cid);
 		model.addAttribute("bContent", bContentDO);
 		model.addAttribute("gtmModified", DateUtils.format(bContentDO.getGtmModified()));
+		// 添加附件
+		List<AttatchmentVO> attatchList = attatchmentService.listAttatchmentByCid(cid);
+		model.addAttribute("attatchList",attatchList);
 		return "blog/index/post";
 	}
 	@GetMapping("/open/page/{categories}")

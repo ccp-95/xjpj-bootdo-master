@@ -21,18 +21,26 @@ public class FileDO implements Serializable {
     private String url;
     // 创建时间
     private Date createDate;
+    // 原始文件名
+    private String originalName;
 
 
     public FileDO() {
         super();
     }
 
-
     public FileDO(Integer type, String url, Date createDate) {
         super();
         this.type = type;
         this.url = url;
         this.createDate = createDate;
+    }
+    public FileDO(Integer type, String url, Date createDate,String originalName) {
+        super();
+        this.type = type;
+        this.url = url;
+        this.createDate = createDate;
+        this.originalName = originalName;
     }
 
 
@@ -92,12 +100,24 @@ public class FileDO implements Serializable {
         return createDate;
     }
 
-    @Override
+    
+    public String getOriginalName() {
+		return originalName;
+	}
+
+
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
+	}
+
+
+	@Override
     public String toString() {
         return "FileDO{" +
                 "id=" + id +
                 ", type=" + type +
                 ", url='" + url + '\'' +
+                ", originalName='" + originalName + '\'' +
                 ", createDate=" + createDate +
                 '}';
     }
