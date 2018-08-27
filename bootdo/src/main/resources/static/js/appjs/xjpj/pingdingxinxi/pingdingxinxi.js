@@ -87,7 +87,8 @@ function load() {
 								},
 																{
 									field : 'gangWei', 
-									title : '岗位' 
+									title : '岗位',
+									width : '8%'
 								},
 																{
 									field : 'sfzh', 
@@ -96,6 +97,7 @@ function load() {
 																{
 									field : 'xingJi', 
 									title : '星级',
+									width : '8%',
 									formatter : function(value, row, index) {
 										if(value=='0'){
 											return '失格';
