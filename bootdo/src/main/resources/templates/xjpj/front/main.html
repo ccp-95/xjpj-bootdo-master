@@ -31,7 +31,10 @@
 			</div>
 		</div>
 		<div class="row text-center">
-			<h3 id="tblTitle"></h3>
+			<div class="col-md-2 col-sm-3" style="margin-top: 22px;padding-left: 100px;"><a id="prevKhzq" href="#" onclick="prev()">《《</a></div>
+			<div class="col-md-8  col-sm-6"><h3 id="tblTitle"></h3></div>
+			<div class="col-md-2 col-sm-3" style="margin-top: 22px;padding-right: 100px;"><a id="nextKhzq" href="#" onclick="next()">》》</a></div>
+			<input id="khzq" name="khzq" type="hidden">
 		</div>
 		<div class="row">
 			<div class="col-lg-10 col-lg-offset-1 col-md-12">
@@ -45,7 +48,7 @@
 							<th data-field="deptName" rowspan="2" data-valign="middle"
 								data-align="center" data-formatter="dwFormatter">单位</th>
 							<th data-field="pdzgrs" rowspan="2" data-valign="middle"
-								data-align="center">参与职工人数</th>
+								data-align="center" data-formatter="pdzgrsFormatter">参与职工人数</th>
 							<th colspan="2" data-valign="middle" data-align="center">三星级<img src="/img/star.jpg" height="24" width="26" /><img src="/img/star.jpg" height="24" width="26" /><img src="/img/star.jpg" height="24" width="26" /></th>
 							<th colspan="2" data-valign="middle" data-align="center">二星级<img src="/img/star.jpg" height="24" width="26" /><img src="/img/star.jpg" height="24" width="26" /></th>
 							<th colspan="2" data-valign="middle" data-align="center">一星级<img src="/img/star.jpg" height="24" width="26" /></th>
@@ -102,27 +105,139 @@
 			striped : false, // 设置为true会有隔行变色效果
 			dataType : "json", // 服务器返回的数据类型
 			pagination : false, // 设置为true会在底部显示分页条
+			queryParams : function(params) {
+				return {
+					// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+					khzq : $("#khzq").val()
+				// name:$('#searchName').val(),
+				// username:$('#searchName').val()
+				};
+			},
 			onLoadSuccess:function(data){
 				var title = '';
 				if(data != null && data.length>0){
+					$("#khzq").val(data[0].khzq);
 					var year = data[0].khzq.substring(0,4);
 					var month = data[0].khzq.substring(4,6);
 					title +=year+'年'+month+'月份集团公司“星级职工”评定基本情况统计表';
-					
+					$('#tblTitle').html(title);
+					var curDate = new Date();
+					curDate.setMonth(curDate.getMonth()-1);
+					var khDate = new Date();
+					khDate.setYear(year);
+					khDate.setMonth(Number(month)-1);
+					/* if(curDate<=khDate){
+						$('#nextKhzq').hide();
+					}
+					else{
+						$('#nextKhzq').show();
+					}
+					if(khDate.getMonth()<=7){
+						$('#prevKhzq').hide();
+					}
+					else{
+						$('#prevKhzq').show();
+					} */
+				    var sum_pdzgrs = 0;
+				    var sum_sxrs = 0;
+				    var sum_exrs = 0;
+				    var sum_yxrs = 0;
+				    
+				    for (var o in data) {
+				    	sum_pdzgrs = parseInt(sum_pdzgrs) + parseInt(data[o].pdzgrs);
+				    	sum_sxrs = parseFloat(sum_sxrs) + parseFloat(data[o].sxrs);
+				    	sum_exrs = parseFloat(sum_exrs) + parseFloat(data[o].exrs);
+				    	sum_yxrs = parseFloat(sum_yxrs) + parseFloat(data[o].yxrs);
+				    }
+				    var rowHeji = {
+				    	deptName: "合计",
+				    	pdzgrs:sum_pdzgrs,
+				    	sxrs:sum_sxrs,
+				    	sxbl:sum_sxrs/sum_pdzgrs,
+				    	exrs:sum_exrs,
+				    	exbl:sum_exrs/sum_pdzgrs,
+				    	yxrs:sum_yxrs,
+				    	yxbl:sum_yxrs/sum_pdzgrs
+				    };
+				    $('#exampleTable').bootstrapTable('insertRow', {index:0, row:rowHeji});
 				}
-				$('#tblTitle').append(title);
+				else{
+					$('#tblTitle').html("暂无数据");
+				}
+				
 				
 			}
 			
 		});
 	}
+	function prev(){
+		var currentKhzq = $("#khzq").val();
+		var curYear = Number(currentKhzq.substring(0,4));
+		var curMonth = Number(currentKhzq.substring(4,6));
+		var prevYear;
+		var prevMonth;
+		if(curMonth>1){
+			prevYear = curYear;
+			prevMonth = curMonth-1;
+		}
+		else{
+			prevYear = curYear - 1;
+			prevMonth = 12;
+		}
+			
+		if(prevMonth<10)
+			prevMonth = '0'+prevMonth;
+		var prevKhzq =prevYear+''+prevMonth;
 
+		$("#khzq").val(prevKhzq);
+
+		$('#exampleTable').bootstrapTable('refresh');
+	}
+	function next(){
+		var currentKhzq = $("#khzq").val();
+		var curYear = Number(currentKhzq.substring(0,4));
+		var curMonth = Number(currentKhzq.substring(4,6));
+		var nextYear;
+		var nextMonth;
+		if(curMonth<12){
+			nextYear = curYear;
+			nextMonth = curMonth+1;
+		}
+		else{
+			nextYear = curYear + 1;
+			nextMonth = 1;
+		}
+			
+		if(nextMonth<10)
+			nextMonth = '0'+nextMonth;
+		var nextKhzq =nextYear+''+nextMonth;
+
+		$("#khzq").val(nextKhzq);
+
+		$('#exampleTable').bootstrapTable('refresh');
+	}
 	function dwFormatter(value, row, index) {
+		if(row.deptName=="合计"){
+			return "<b>"+value+"</b>";
+		}
 		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+value+"'>"+value+"</a>";
 		return a;
 	}
 	
+	function pdzgrsFormatter(value, row, index) {
+		if(row.deptName=="合计"){
+			return value;
+		}
+		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
+				+"'>"
+				+value+"</a>";
+		return a;
+	}
+	
 	function sxrsFormatter(value, row, index) {
+		if(row.deptName=="合计"){
+			return value;
+		}
 		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
 				+"&xingJi="+3
 				+"'>"
@@ -130,6 +245,9 @@
 		return a;
 	}
 	function exrsFormatter(value, row, index) {
+		if(row.deptName=="合计"){
+			return value;
+		}
 		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
 				+"&xingJi="+2
 				+"'>"
@@ -137,6 +255,9 @@
 		return a;
 	}
 	function yxrsFormatter(value, row, index) {
+		if(row.deptName=="合计"){
+			return value;
+		}
 		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
 				+"&xingJi="+1
 				+"'>"
@@ -144,7 +265,12 @@
 		return a;
 	}
 	function xhFormatter(value, row, index) {
-		return index + 1;
+		if(row.deptName=="合计"){
+			return "";
+		}
+		else{
+			return index;
+		}
 	}
 
 	function blFormatter(value, row, index) {

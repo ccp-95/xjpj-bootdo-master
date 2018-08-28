@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.zztlj.xjpj.domain.PingdingxinxiDO;
+import com.zztlj.xjpj.domain.WhitelistDO;
 import com.zztlj.xjpj.service.PingdingxinxiService;
+import com.zztlj.xjpj.service.WhitelistService;
 import com.zztlj.xjpj.utils.ConfigUtil;
 import com.zztlj.xjpj.utils.DateUtils;
 import com.bootdo.common.domain.FileDO;
@@ -49,6 +51,9 @@ import com.github.crab2died.ExcelUtils;
 public class PingdingxinxiController {
 	@Autowired
 	private PingdingxinxiService pingdingxinxiService;
+	
+	@Autowired
+	private WhitelistService whitelistService;
 	
 	@GetMapping()
 	@RequiresPermissions("xjpj:pingdingxinxi:pingdingxinxi")
@@ -172,10 +177,20 @@ public class PingdingxinxiController {
 		cal.setTime(archiveDate);
 		cal.add(Calendar.MONTH, 1);
 		archiveDate = cal.getTime();
+		
+		// 判断用户是否在截止时间白名单中
+		UserDO  user = (UserDO) SecurityUtils.getSubject().getPrincipal();
+		
+		WhitelistDO whitelistDO = whitelistService.getByDeptId(user.getDeptId());
+		
+		if(whitelistDO!=null && whitelistDO.getExpiryDate().compareTo(archiveDate)>0){
+			archiveDate = whitelistDO.getExpiryDate();
+		}
+		
 		Date now = new Date();
 		//当前时间超出归档时间
 		if(now.compareTo(archiveDate)>0){
-			return R.error("已过截止时间，请于每月"+archiveDayStr+"日前录入上个考核周期的评价信息！如有疑问请联系管理员！");
+			return R.error("已过截止时间，请于"+archiveDayStr+"日前录入上个考核周期的评价信息！如有疑问请联系管理员！");
 		}
 		
 		String fileName = file.getOriginalFilename();
@@ -191,7 +206,7 @@ public class PingdingxinxiController {
 		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
 		try {
 			System.out.println("考核周期 ："+khzq+"  "+sysFile.toString());
-			UserDO  user = (UserDO) SecurityUtils.getSubject().getPrincipal();
+			
 			List<PingdingxinxiDO> list = ExcelUtils.getInstance().readExcel2Objects(iStream, PingdingxinxiDO.class);
             System.out.println("读取Excel至String数组：");
             for (PingdingxinxiDO pdxx : list) {

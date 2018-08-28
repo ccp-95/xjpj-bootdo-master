@@ -95,7 +95,12 @@ function load() {
 								},
 								{
 									field : 'sfzh',
-									title : '身份证号'
+									title : '身份证号',
+									formatter : function(value, row, index) {
+										var a = value.substr(0,10);
+										var b = value.substr(15,17);
+										return a +'*****' + b;
+									}
 								},
 								{
 									field : 'xingJi',

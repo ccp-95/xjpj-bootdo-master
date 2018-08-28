@@ -110,3 +110,32 @@ alter table SYS_DEPT add TYPE NUMBER(4);
 -- Add comments to the columns 
 comment on column SYS_DEPT.TYPE
   is '0:根节点 1:系统 2:单位 3:部门';
+  
+  
+  
+-- Create table
+create table XJPJ_WHITELIST
+(
+  ID          number,
+  dept_id     number not null,
+  expiry_date date not null
+)
+;
+-- Add comments to the columns 
+comment on column XJPJ_WHITELIST.ID
+  is '序号';
+comment on column XJPJ_WHITELIST.dept_id
+  is '部门ID';
+comment on column XJPJ_WHITELIST.expiry_date
+  is '有效期';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table XJPJ_WHITELIST
+  add constraint PK_XJPJ_WHITELIST_ID primary key (ID);
+  
+  
+  -- Create sequence 
+create sequence SEQ_XJPJ_WHITELIST
+minvalue 100
+start with 100
+nocache;
+

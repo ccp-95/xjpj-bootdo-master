@@ -31,6 +31,7 @@ public class StatisticsController {
 			Date now = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(now);
+			cal.add(Calendar.MONTH, -1);
 			int day = cal.get(Calendar.DATE);
 			Configuration config = ConfigUtil.getConfig();
 			
@@ -38,9 +39,9 @@ public class StatisticsController {
 			if (day<Integer.parseInt(publishDay)) {
 				cal.add(Calendar.MONTH, -1);
 			}
-			
 			khzq = DateUtils.format(cal.getTime(), "yyyyMM");
 		}
+		
 		return statitsticService.calcPdqktj(khzq);
 	}
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zztlj.xjpj.dao.WhitelistDao">
+
+	<select id="get" resultType="com.zztlj.xjpj.domain.WhitelistDO">
+		select ID,DEPT_ID,EXPIRY_DATE from XJPJ_WHITELIST where ID = #{value}
+	</select>
+
+	<select id="getByDeptId" resultType="com.zztlj.xjpj.domain.WhitelistDO">
+		select ID,DEPT_ID,EXPIRY_DATE from
+		(select ID,DEPT_ID,EXPIRY_DATE from XJPJ_WHITELIST where DEPT_ID = #{value} 
+		order by EXPIRY_DATE DESC )
+		where rownum=1
+	</select>
+	<select id="list" resultType="com.zztlj.xjpj.domain.WhitelistDO">
+	    <include refid="pagination.Oracle_Pagination_Head" />
+		select w.ID,w.DEPT_ID,d.name as dept_name,w.EXPIRY_DATE from XJPJ_WHITELIST w left join sys_dept d on w.dept_id=d.dept_id
+        <where>  
+		  		  <if test="id != null and id != ''"> and w.ID = #{id} </if>
+		  		  <if test="deptId != null and deptId != ''"> and w.DEPT_ID = #{deptId} </if>
+		  		  <if test="expiryDate != null and expiryDate != ''"> and w.EXPIRY_DATE = #{expiryDate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by w.ID desc
+			</otherwise>
+        </choose>
+		<include refid="pagination.Oracle_Pagination_Tail" />
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from XJPJ_WHITELIST
+		 <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="deptId != null and deptId != ''"> and DEPT_ID = #{deptId} </if>
+		  		  <if test="expiryDate != null and expiryDate != ''"> and EXPIRY_DATE = #{expiryDate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.zztlj.xjpj.domain.WhitelistDO">
+		<selectKey resultType="long" keyProperty="id" order="BEFORE">  
+			SELECT SEQ_XJPJ_WHITELIST.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into XJPJ_WHITELIST
+		(
+			ID, 
+			DEPT_ID, 
+			EXPIRY_DATE
+		)
+		values
+		(
+			#{id,jdbcType=NUMERIC}, 		
+			#{deptId,jdbcType=NUMERIC}, 		
+			#{expiryDate,jdbcType=DATE}		
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.zztlj.xjpj.domain.WhitelistDO">
+		update XJPJ_WHITELIST 
+		<set>
+			<if test="deptId != null"> DEPT_ID  = #{deptId}, </if>
+			<if test="expiryDate != null"> EXPIRY_DATE  = #{expiryDate}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from XJPJ_WHITELIST where ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from XJPJ_WHITELIST where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

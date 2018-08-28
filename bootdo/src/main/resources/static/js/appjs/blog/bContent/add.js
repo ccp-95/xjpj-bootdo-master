@@ -33,7 +33,7 @@ $().ready(
 		        var uploadInst = upload.render({
 		            elem: '#btnUpload', //绑定元素
 		            url: '/common/sysFile/upload', //上传接口
-		            size: 10000,
+		            size: 50000,
 		            accept: 'file',
 		            done: function (r) {
 		                layer.msg(r.msg);
