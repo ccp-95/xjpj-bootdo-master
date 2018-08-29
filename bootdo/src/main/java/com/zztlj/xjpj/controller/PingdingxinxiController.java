@@ -215,8 +215,12 @@ public class PingdingxinxiController {
                 pingdingxinxiService.saveOrUpdate(pdxx);
             }
 			return R.ok().put("fileName",sysFile.getUrl());
-		} catch (Exception e) {
-			return R.error();
+		}catch (NumberFormatException e) {
+			
+			return R.error("分数格式错误，请检查！错误数据为："+e.getMessage());
+		}catch (Exception e) {
+			
+			return R.error(e.getMessage());
 		}
 
 	}
