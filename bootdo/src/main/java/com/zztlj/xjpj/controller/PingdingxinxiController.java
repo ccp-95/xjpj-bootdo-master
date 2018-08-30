@@ -85,6 +85,13 @@ public class PingdingxinxiController {
 		//查询列表数据
         Query query = new Query(params);
 		List<PingdingxinxiDO> pingdingxinxiList = pingdingxinxiService.list(query);
+		//屏蔽身份证号中间5位
+		for (PingdingxinxiDO pingdingxinxiDO : pingdingxinxiList) {
+			
+			String sfzh = pingdingxinxiDO.getSfzh();
+			sfzh = sfzh.substring(0, 10)+"*****"+sfzh.substring(15);
+			pingdingxinxiDO.setSfzh(sfzh);
+		}
 		int total = pingdingxinxiService.count(query);
 		PageUtils pageUtils = new PageUtils(pingdingxinxiList, total);
 		return pageUtils;
