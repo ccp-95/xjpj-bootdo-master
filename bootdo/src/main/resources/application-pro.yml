@@ -1,5 +1,5 @@
 bootdo:
-  uploadPath: /var/uploaded_files/
+  uploadPath: D:/var/uploaded_files/
 logging:
   level:
     root: error
@@ -7,10 +7,10 @@ logging:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/bootdo?useUnicode=true&characterEncoding=utf8
-    username: root
-    password: root
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@10.96.9.110:1521:zhyy
+    username: xjpj
+    password: xjpj
     initialSize: 1
     minIdle: 3
     maxActive: 20
@@ -20,7 +20,7 @@ spring:
     timeBetweenEvictionRunsMillis: 60000
     # 配置一个连接在池中最小生存的时间，单位是毫秒
     minEvictableIdleTimeMillis: 30000
-    validationQuery: select 'x'
+    validationQuery: select 1 from dual
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false

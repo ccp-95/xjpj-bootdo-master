@@ -9,6 +9,7 @@ function load() {
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
 						url : prefix + "/list", // 服务器数据的加载地址
+						cache : false,
 						striped : true, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
 						pagination : true, // 设置为true会在底部显示分页条

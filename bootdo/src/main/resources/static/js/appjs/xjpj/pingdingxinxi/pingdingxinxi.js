@@ -13,6 +13,7 @@ function load() {
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
+						cache: false, 
 						iconSize : 'outline',
 						toolbar : '#exampleToolbar',
 						striped : true, // 设置为true会有隔行变色效果

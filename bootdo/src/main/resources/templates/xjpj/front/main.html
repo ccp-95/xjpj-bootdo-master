@@ -153,11 +153,11 @@
 				    	deptName: "合计",
 				    	pdzgrs:sum_pdzgrs,
 				    	sxrs:sum_sxrs,
-				    	sxbl:sum_sxrs/sum_pdzgrs,
+				    	sxbl:sum_pdzgrs==0?0:sum_sxrs/sum_pdzgrs,
 				    	exrs:sum_exrs,
-				    	exbl:sum_exrs/sum_pdzgrs,
+				    	exbl:sum_pdzgrs==0?0:sum_exrs/sum_pdzgrs,
 				    	yxrs:sum_yxrs,
-				    	yxbl:sum_yxrs/sum_pdzgrs
+				    	yxbl:sum_pdzgrs==0?0:sum_yxrs/sum_pdzgrs
 				    };
 				    $('#exampleTable').bootstrapTable('insertRow', {index:0, row:rowHeji});
 				}
@@ -220,7 +220,8 @@
 		if(row.deptName=="合计"){
 			return "<b>"+value+"</b>";
 		}
-		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+value+"'>"+value+"</a>";
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+value;
+		var a = "<a href='"+encodeURI(url)+"'>"+value+"</a>";
 		return a;
 	}
 	
@@ -228,8 +229,8 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
-				+"'>"
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName;
+		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;
 	}
@@ -238,9 +239,8 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
-				+"&xingJi="+3
-				+"'>"
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=3";
+		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;
 	}
@@ -248,9 +248,8 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
-				+"&xingJi="+2
-				+"'>"
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=2";
+		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;
 	}
@@ -258,9 +257,8 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var a = "<a href='/front/search?deptId="+row.deptId+"&deptName="+row.deptName
-				+"&xingJi="+1
-				+"'>"
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=1";
+		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;
 	}

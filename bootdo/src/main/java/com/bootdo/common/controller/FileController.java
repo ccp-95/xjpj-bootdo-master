@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -195,9 +196,21 @@ public class FileController extends BaseController {
 	        // set headers for the response  
 	        String headerKey = "Content-Disposition";  
 	        String headerValue;
+	        String fileName = sysFile.getOriginalName();
+	        String header = request.getHeader("User-Agent").toUpperCase();
+	        
+
+
 			try {
+				if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
+		            fileName = URLEncoder.encode(fileName, "utf-8");
+		            fileName = fileName.replace("+", "%20");    //IE下载文件名空格变+号问题
+		        } else {
+		            fileName = new String(fileName.getBytes(), "ISO8859-1");
+		        }
+				
 				headerValue = String.format("attachment; filename=\"%s\"",  
-						 new String(sysFile.getOriginalName().getBytes("UTF8"),"ISO8859-1"));
+						fileName);
 			} catch (UnsupportedEncodingException e1) {
 				headerValue = String.format("attachment; filename=\"%s\"",  
 						 sysFile.getId());
