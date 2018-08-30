@@ -20,18 +20,18 @@
 	<!-- Post Content -->
 	<article>
 		<div class="container">
-			<div class="col-sm-11 text-center">
+			<div class="col-sm-12 text-center">
 				<h3 th:text="${bContent.title}"></h3>
 				<span class="meta">发布时间：<a href="#"
 					th:text="${gtmModified}"></a>
 				</span>
 			</div>
 
-			<div class="col-sm-11">
+			<div class="col-sm-12">
 				<div id="content" class="summernote"></div>
 			</div>
 
-			<div class="col-sm-11">
+			<div class="col-sm-12">
 			<hr>
 			<b>附件：</b>
 				<div id="attatchment" th:each="attatch : ${attatchList}">

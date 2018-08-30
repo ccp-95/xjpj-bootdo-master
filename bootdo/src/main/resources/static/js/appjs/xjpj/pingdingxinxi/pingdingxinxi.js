@@ -45,9 +45,6 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									checkbox : true
-								},
 																{
 									field : 'id', 
 									title : '序号'									
@@ -58,7 +55,8 @@ function load() {
 								},
 																{
 									field : 'deptName', 
-									title : '单位' 
+									title : '单位',
+									width : '8%'
 								},
 																{
 									field : 'zgxm', 
@@ -98,7 +96,7 @@ function load() {
 																{
 									field : 'xingJi', 
 									title : '星级',
-									width : '8%',
+									width : '10%',
 									formatter : function(value, row, index) {
 										if(value=='0'){
 											return '失格';
