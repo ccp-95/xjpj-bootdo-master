@@ -97,11 +97,11 @@
 			#{gangWei,jdbcType=VARCHAR}, 		
 			#{sfzh,jdbcType=VARCHAR}, 		
 			#{xingJi,jdbcType=NUMERIC}, 		
-			#{zhdf,jdbcType=NUMERIC}, 		
-			#{ywjn,jdbcType=NUMERIC}, 		
-			#{zzsj,jdbcType=NUMERIC}, 		
-			#{aqjx,jdbcType=NUMERIC}, 		
-			#{wcgz,jdbcType=NUMERIC}		
+			#{zhdf,jdbcType=VARCHAR}, 		
+			#{ywjn,jdbcType=VARCHAR}, 		
+			#{zzsj,jdbcType=VARCHAR}, 		
+			#{aqjx,jdbcType=VARCHAR}, 		
+			#{wcgz,jdbcType=VARCHAR}		
 		)
 	</insert>
 	 

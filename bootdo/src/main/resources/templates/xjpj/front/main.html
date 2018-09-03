@@ -272,8 +272,8 @@
 	}
 
 	function blFormatter(value, row, index) {
-		var bl = parseFloat(value).toFixed(2);
-		return bl * 100 + "%";
+		var bl = (parseFloat(value)*100).toFixed(0);
+		return bl + "%";
 	}
 
 	/*

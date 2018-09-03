@@ -56,19 +56,19 @@ public class PingdingxinxiDO implements Serializable {
 	private Double xingJi;
 	//综合得分
 	@ExcelField(title = "综合得分", order = 12)
-	private Double zhdf;
+	private String zhdf;
 	//业务技能
 	@ExcelField(title = "业务技能", order = 13)
-	private Double ywjn;
+	private String ywjn;
 	//遵章守纪
 	@ExcelField(title = "遵章守纪", order = 14)
-	private Double zzsj;
+	private String zzsj;
 	//安全绩效
 	@ExcelField(title = "安全绩效", order = 15)
-	private Double aqjx;
+	private String aqjx;
 	//完成工作
 	@ExcelField(title = "完成工作", order = 16)
-	private Double wcgz;
+	private String wcgz;
 
 	/**
 	 * 设置：序号
@@ -110,13 +110,13 @@ public class PingdingxinxiDO implements Serializable {
 		return deptName;
 	}
 	public void setDeptName(String deptName) {
-		this.deptName = deptName.trim();
+		this.deptName = deptName.replaceAll(" ", "");
 	}
 	/**
 	 * 设置：职工姓名
 	 */
 	public void setZgxm(String zgxm) {
-		this.zgxm = zgxm.trim();
+		this.zgxm = zgxm.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：职工姓名
@@ -140,7 +140,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：性别 0：女 1：男
 	 */
 	public void setXb(String xb) {
-		this.xb = xb.trim();
+		this.xb = xb.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：性别 0：女 1：男
@@ -152,7 +152,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：车间
 	 */
 	public void setCheJian(String cheJian) {
-		this.cheJian = cheJian.trim();
+		this.cheJian = cheJian.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：车间
@@ -164,7 +164,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：班组
 	 */
 	public void setBanZu(String banZu) {
-		this.banZu = banZu.trim();
+		this.banZu = banZu.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：班组
@@ -176,7 +176,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：岗位
 	 */
 	public void setGangWei(String gangWei) {
-		this.gangWei = gangWei.trim();
+		this.gangWei = gangWei.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：岗位
@@ -188,7 +188,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：身份证号
 	 */
 	public void setSfzh(String sfzh) {
-		this.sfzh = sfzh.trim();
+		this.sfzh = sfzh.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：身份证号
@@ -211,61 +211,61 @@ public class PingdingxinxiDO implements Serializable {
 	/**
 	 * 设置：综合得分
 	 */
-	public void setZhdf(Double zhdf) {
-		this.zhdf = zhdf;
+	public void setZhdf(String zhdf) {
+		this.zhdf = zhdf.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：综合得分
 	 */
-	public Double getZhdf() {
+	public String getZhdf() {
 		return zhdf;
 	}
 	/**
 	 * 设置：业务技能
 	 */
-	public void setYwjn(Double ywjn) {
-		this.ywjn = ywjn;
+	public void setYwjn(String ywjn) {
+		this.ywjn = ywjn.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：业务技能
 	 */
-	public Double getYwjn() {
+	public String getYwjn() {
 		return ywjn;
 	}
 	/**
 	 * 设置：遵章守纪
 	 */
-	public void setZzsj(Double zzsj) {
-		this.zzsj = zzsj;
+	public void setZzsj(String zzsj) {
+		this.zzsj = zzsj.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：遵章守纪
 	 */
-	public Double getZzsj() {
+	public String getZzsj() {
 		return zzsj;
 	}
 	/**
 	 * 设置：安全绩效
 	 */
-	public void setAqjx(Double aqjx) {
-		this.aqjx = aqjx;
+	public void setAqjx(String aqjx) {
+		this.aqjx = aqjx.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：安全绩效
 	 */
-	public Double getAqjx() {
+	public String getAqjx() {
 		return aqjx;
 	}
 	/**
 	 * 设置：完成工作
 	 */
-	public void setWcgz(Double wcgz) {
-		this.wcgz = wcgz;
+	public void setWcgz(String wcgz) {
+		this.wcgz = wcgz.replaceAll(" ", "");
 	}
 	/**
 	 * 获取：完成工作
 	 */
-	public Double getWcgz() {
+	public String getWcgz() {
 		return wcgz;
 	}
 }
