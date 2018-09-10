@@ -2,6 +2,15 @@
 var prefix = "/xjpj/pingdingxinxi"
 $(function() {
 	load();
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//执行实例
+		var laydateInst = laydate.render({
+			elem : '#khzq', //绑定元素
+			type : 'month',
+			format : 'yyyyMM'
+		});
+	});
 });
 
 function load() {
@@ -34,7 +43,8 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-								zgxm:$('#searchName').val()
+								zgxm:$('#searchName').val(),
+								khzq:$('#khzq').val()
 					           // username:$('#searchName').val()
 							};
 						},

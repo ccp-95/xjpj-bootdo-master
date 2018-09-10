@@ -220,7 +220,7 @@
 		if(row.deptName=="合计"){
 			return "<b>"+value+"</b>";
 		}
-		var url = "/front/search?deptId="+row.deptId+"&deptName="+value;
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+value+"&khzq="+$("#khzq").val();
 		var a = "<a href='"+encodeURI(url)+"'>"+value+"</a>";
 		return a;
 	}
@@ -229,7 +229,7 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName;
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&khzq="+$("#khzq").val();
 		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;
@@ -239,7 +239,7 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=3";
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=3"+"&khzq="+$("#khzq").val();
 		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;
@@ -248,7 +248,7 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=2";
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=2"+"&khzq="+$("#khzq").val();
 		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;
@@ -257,7 +257,7 @@
 		if(row.deptName=="合计"){
 			return value;
 		}
-		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=1";
+		var url = "/front/search?deptId="+row.deptId+"&deptName="+row.deptName+"&xingJi=1"+"&khzq="+$("#khzq").val();
 		var a = "<a href='"+encodeURI(url)+"'>"
 				+value+"</a>";
 		return a;

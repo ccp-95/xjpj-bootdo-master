@@ -33,7 +33,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by p.khzq desc,p.ID
+                order by p.khzq desc,p.ID desc
 			</otherwise>
         </choose>
 		<include refid="pagination.Oracle_Pagination_Tail" />

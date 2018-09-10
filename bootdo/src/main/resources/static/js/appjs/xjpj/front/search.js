@@ -1,6 +1,15 @@
 var prefix = "/xjpj/pingdingxinxi"
 $(function() {
 	load();
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//执行实例
+		var laydateInst = laydate.render({
+			elem : '#khzq', //绑定元素
+			type : 'month',
+			format : 'yyyyMM'
+		});
+	});
 });
 
 function load() {
@@ -35,6 +44,7 @@ function load() {
 								sfzh : $("#sfzh").val(),
 								xingJi : $("#xingJi").val(),
 								gangWei : $("#gangWei").val(),
+								khzq : $("#khzq").val(),
 								limit : params.limit,
 								offset : params.offset
 							// name:$('#searchName').val(),

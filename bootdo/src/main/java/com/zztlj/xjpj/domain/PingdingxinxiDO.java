@@ -3,6 +3,7 @@ package com.zztlj.xjpj.domain;
 import java.io.Serializable;
 
 import com.github.crab2died.annotation.ExcelField;
+import com.zztlj.xjpj.utils.NumberUtil;
 import com.zztlj.xjpj.utils.PingdingxinxiXBConverter;
 import com.zztlj.xjpj.utils.PingdingxinxiXJConverter;
 
@@ -212,7 +213,9 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：综合得分
 	 */
 	public void setZhdf(String zhdf) {
-		this.zhdf = zhdf.replaceAll(" ", "");
+		
+		this.zhdf = formatFs(zhdf.replaceAll(" ", ""));
+		
 	}
 	/**
 	 * 获取：综合得分
@@ -224,7 +227,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：业务技能
 	 */
 	public void setYwjn(String ywjn) {
-		this.ywjn = ywjn.replaceAll(" ", "");
+		this.ywjn = formatFs(ywjn.replaceAll(" ", ""));
 	}
 	/**
 	 * 获取：业务技能
@@ -236,7 +239,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：遵章守纪
 	 */
 	public void setZzsj(String zzsj) {
-		this.zzsj = zzsj.replaceAll(" ", "");
+		this.zzsj = formatFs(zzsj.replaceAll(" ", ""));
 	}
 	/**
 	 * 获取：遵章守纪
@@ -248,7 +251,7 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：安全绩效
 	 */
 	public void setAqjx(String aqjx) {
-		this.aqjx = aqjx.replaceAll(" ", "");
+		this.aqjx = formatFs(aqjx.replaceAll(" ", ""));
 	}
 	/**
 	 * 获取：安全绩效
@@ -260,12 +263,22 @@ public class PingdingxinxiDO implements Serializable {
 	 * 设置：完成工作
 	 */
 	public void setWcgz(String wcgz) {
-		this.wcgz = wcgz.replaceAll(" ", "");
+		this.wcgz = formatFs(wcgz.replaceAll(" ", ""));
 	}
 	/**
 	 * 获取：完成工作
 	 */
 	public String getWcgz() {
 		return wcgz;
+	}
+	
+	private String formatFs(String fs){
+		if (NumberUtil.isNumeric(fs)) {
+			double d = Double.parseDouble(fs);
+			return NumberUtil.formatDouble(d, "#.00");
+		}
+		else{
+			return fs;
+		}
 	}
 }

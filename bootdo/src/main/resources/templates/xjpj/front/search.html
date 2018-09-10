@@ -23,36 +23,37 @@
 		</div>
 		<div class="fixed-table-toolbar">
 			<div class="row">
-				<div class="col-sm-4 form-inline">
-					<label class="control-label">单位：</label> <input id="deptId"
+				<div class="col-sm-3 form-inline">
+					<label class="control-label">单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：</label> <input id="deptId"
 						name="deptId" class="hidden" th:value="${deptId}"> <input id="deptName"
 						name="deptName" class="form-control" type="text"
 						style="cursor: pointer;" onclick="openDept()" readonly="readonly"
 						placeholder="所属部门" th:value="${deptName}">
 				</div>
-				<div class="col-sm-4 form-inline">
+				<div class="col-sm-3 form-inline">
 					<label class="control-label form-inline">所属车间：</label> <input
 						id="cheJian" name="cheJian" class="form-control" type="text"
 						placeholder="所属车间" th:value="${cheJian}">
 				</div>
-				<div class="col-sm-4 form-inline">
-					<label class="control-label form-inline">班组：</label> <input
+				<div class="col-sm-3 form-inline">
+					<label class="control-label form-inline">班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;组：</label> <input
 						id="banZu" name="banZu" class="form-control" type="text"
 						placeholder="所属班组" th:value="${banZu}">
+				</div>
+				<div class="col-sm-3 form-inline">
+					<label class="control-label">岗&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：</label> <input id="gangWei"
+						name="gangWei" class="form-control" type="text" placeholder="岗位" th:value="${gangWei}">
 				</div>
 
 			</div>
 			<div class="row">
-			<div class="col-sm-4 form-inline">
-					<label class="control-label">岗位：</label> <input id="gangWei"
-						name="gangWei" class="form-control" type="text" placeholder="岗位" th:value="${gangWei}">
-				</div>
-				<div class="col-sm-4 form-inline">
+			
+				<div class="col-sm-3 form-inline">
 					<label class="control-label">身份证号：</label> <input id="sfzh"
 						name="sfzh" class="form-control" type="text" placeholder="身份证号" th:value="${sfzh}">
 				</div>
-				<div class="col-sm-4 form-inline">
-					<label class="control-label">星級： </label> 
+				<div class="col-sm-3 form-inline">
+					<label class="control-label">星&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;級： </label> 
 					<select id="xingJi"
 						name="xingJi" class="form-control" th:value="${xingJi}">
 						<option th:selected="${xingJi==''}" value="">-全部-</option>
@@ -62,13 +63,16 @@
 						<option th:selected="${xingJi=='0'}" value="0">失格</option>
 					</select>
 				</div>
-
-				
+				<div class="col-sm-3 form-inline">
+					<label class="control-label">考核周期：</label> <input id="khzq"
+						name="khzq" class="form-control" type="text" readonly="readonly" placeholder="考核周期" th:value="${khzq}">
+				</div>
+				<div class="col-sm-3 form-inline	">
+					<button class="btn btn-primary" onclick="reLoad()" type="button">查询</button>
+					<button class="btn btn-success" onclick="reset()" type="button">重置</button>
+				</div>
 			</div>
-			<div class="row form-inline	col-sm-12">
-				<button class="btn btn-primary" onclick="reLoad()" type="button">查询</button>
-				<button class="btn btn-success" onclick="reset()" type="button">重置</button>
-			</div>
+			
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-lg-offset-0 col-md-10 col-md-offset-1">
