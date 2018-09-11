@@ -1,12 +1,11 @@
-
 var prefix = "/xjpj/pingdingxinxi"
 $(function() {
 	load();
 	layui.use('laydate', function() {
 		var laydate = layui.laydate;
-		//执行实例
+		// 执行实例
 		var laydateInst = laydate.render({
-			elem : '#khzq', //绑定元素
+			elem : '#khzq', // 绑定元素
 			type : 'month',
 			format : 'yyyyMM'
 		});
@@ -19,10 +18,10 @@ function load() {
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
 						url : prefix + "/list", // 服务器数据的加载地址
-					//	showRefresh : true,
-					//	showToggle : true,
-					//	showColumns : true,
-						cache: false, 
+						// showRefresh : true,
+						// showToggle : true,
+						// showColumns : true,
+						cache : false,
 						iconSize : 'outline',
 						toolbar : '#exampleToolbar',
 						striped : true, // 设置为true会有隔行变色效果
@@ -35,17 +34,18 @@ function load() {
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
-						//search : true, // 是否显示搜索框
+						// search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
-						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
+													// "server"
 						queryParams : function(params) {
 							return {
-								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-								limit: params.limit,
-								offset:params.offset,
-								zgxm:$('#searchName').val(),
-								khzq:$('#khzq').val()
-					           // username:$('#searchName').val()
+								// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+								limit : params.limit,
+								offset : params.offset,
+								zgxm : $('#searchName').val(),
+								khzq : $('#khzq').val()
+							// username:$('#searchName').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -55,107 +55,114 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-																{
-									field : 'id', 
-									title : '序号'									
+								{
+									checkbox : true
 								},
-																{
-									field : 'khzq', 
-									title : '考核周期' 
+								{
+									field : 'id',
+									title : '序号'
 								},
-																{
-									field : 'deptName', 
+								{
+									field : 'khzq',
+									title : '考核周期'
+								},
+								{
+									field : 'deptName',
 									title : '单位',
 									width : '8%'
 								},
-																{
-									field : 'zgxm', 
-									title : '职工姓名' 
+								{
+									field : 'zgxm',
+									title : '职工姓名'
 								},
-																{
-									field : 'nl', 
-									title : '年龄' 
+								{
+									field : 'nl',
+									title : '年龄'
 								},
-																{
-									field : 'xb', 
+								{
+									field : 'xb',
 									title : '性别',
 									formatter : function(value, row, index) {
-										if(value=='1')
+										if (value == '1')
 											return '男';
 										else
 											return '女';
 									}
 								},
-																{
-									field : 'cheJian', 
-									title : '车间' 
+								{
+									field : 'cheJian',
+									title : '车间'
 								},
-																{
-									field : 'banZu', 
-									title : '班组' 
+								{
+									field : 'banZu',
+									title : '班组'
 								},
-																{
-									field : 'gangWei', 
+								{
+									field : 'gangWei',
 									title : '岗位',
 									width : '8%'
 								},
-																{
-									field : 'sfzh', 
-									title : '身份证号' 
+								{
+									field : 'sfzh',
+									title : '身份证号'
 								},
-																{
-									field : 'xingJi', 
+								{
+									field : 'xingJi',
 									title : '星级',
 									width : '10%',
 									formatter : function(value, row, index) {
-										if(value=='0'){
+										if (value == '0') {
 											return '失格';
-										}
-										else{
+										} else {
 											var stars = '';
-											for(var i=0;i<value;i++){
+											for (var i = 0; i < value; i++) {
 												stars += '<span class="glyphicon glyphicon-star"></span>';
 											}
 											return stars;
-											//return '<span class="glyphicon glyphicon-star"></span>';
+											// return '<span class="glyphicon
+											// glyphicon-star"></span>';
 										}
 									}
 								},
-																{
-									field : 'zhdf', 
-									title : '综合得分' 
+								{
+									field : 'zhdf',
+									title : '综合得分'
 								},
-																{
-									field : 'ywjn', 
-									title : '业务技能' 
+								{
+									field : 'ywjn',
+									title : '业务技能'
 								},
-																{
-									field : 'zzsj', 
-									title : '遵章守纪' 
+								{
+									field : 'zzsj',
+									title : '遵章守纪'
 								},
-																{
-									field : 'aqjx', 
-									title : '安全绩效' 
+								{
+									field : 'aqjx',
+									title : '安全绩效'
 								},
-																{
-									field : 'wcgz', 
-									title : '完成工作' 
+								{
+									field : 'wcgz',
+									title : '完成工作'
 								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+										var e = '<a class="btn btn-primary btn-sm '
+												+ s_edit_h
+												+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
 												+ row.id
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+										var d = '<a class="btn btn-warning btn-sm '
+												+ s_remove_h
+												+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+										return e + d;
 									}
 								} ]
 					});
@@ -199,16 +206,16 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefix + "/remove",
 			type : "post",
 			data : {
 				'id' : id
 			},
 			success : function(r) {
-				if (r.code==0) {
+				if (r.code == 0) {
 					layer.msg(r.msg);
 					reLoad();
-				}else{
+				} else {
 					layer.msg(r.msg);
 				}
 			}

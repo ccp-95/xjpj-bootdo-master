@@ -130,8 +130,6 @@
 	<update id="updateWithSfzh" parameterType="com.zztlj.xjpj.domain.PingdingxinxiDO">
 		update XJPJ_PINGDINGXINXI 
 		<set>
-			<if test="khzq != null"> KHZQ  = #{khzq}, </if>
-			<if test="deptId != null"> DEPT_ID  = #{deptId}, </if>
 			<if test="zgxm != null"> ZGXM  = #{zgxm}, </if>
 			<if test="nl != null"> NL  = #{nl}, </if>
 			<if test="xb != null"> XB  = #{xb}, </if>
@@ -145,7 +143,7 @@
 			<if test="aqjx != null"> AQJX  = #{aqjx}, </if>
 			<if test="wcgz != null"> WCGZ  = #{wcgz}</if>
 		</set>
-		where sfzh = #{sfzh}
+		where sfzh = #{sfzh} and khzq=#{khzq} and DEPT_ID=#{deptId}
 	</update>
 	
 	<delete id="remove">

@@ -13,7 +13,7 @@ public class NumberUtil {
 	 * @return
 	 */
 	public static boolean isNumeric(String str) {
-		Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]+");
+		Pattern pattern = Pattern.compile("^\\d+(\\.\\d+)?$");
 		Matcher isNum = pattern.matcher(str);
 		if (!isNum.matches()) {
 			return false;
@@ -27,4 +27,15 @@ public class NumberUtil {
         
         return df.format(d);
     }
+	
+	public static void main(String[] args) {
+		System.out.println(isNumeric("9"));
+		System.out.println(isNumeric("9.9"));
+		System.out.println(isNumeric("9.9123123"));
+		System.out.println(isNumeric("9,9"));
+
+		System.out.println(isNumeric("啊啊"));
+
+		System.out.println(isNumeric("9.9.9"));
+	}
 }
