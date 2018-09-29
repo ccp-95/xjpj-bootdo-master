@@ -4,12 +4,12 @@
 <mapper namespace="com.zztlj.xjpj.dao.PingdingxinxiDao">
 
 	<select id="get" resultType="com.zztlj.xjpj.domain.PingdingxinxiDO">
-		select ID,KHZQ,DEPT_ID,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ from XJPJ_PINGDINGXINXI where ID = #{value}
+		select ID,KHZQ,DEPT_ID,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ,OTHER1,OTHER2 from XJPJ_PINGDINGXINXI where ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.zztlj.xjpj.domain.PingdingxinxiDO">
 	    <include refid="pagination.Oracle_Pagination_Head" />
-		select p.ID,KHZQ,p.DEPT_ID,d.name as DEPT_NAME,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ from XJPJ_PINGDINGXINXI p left join sys_dept d on p.dept_id = d.dept_id 
+		select p.ID,KHZQ,p.DEPT_ID,d.name as DEPT_NAME,ZGXM,NL,XB,CHE_JIAN,BAN_ZU,GANG_WEI,SFZH,XING_JI,ZHDF,YWJN,ZZSJ,AQJX,WCGZ,OTHER1,OTHER2 from XJPJ_PINGDINGXINXI p left join sys_dept d on p.dept_id = d.dept_id 
         <where>  
 		  		  <if test="id != null and id != ''"> and p.ID = #{id} </if>
 		  		  <if test="khzq != null and khzq != ''"> and KHZQ = #{khzq} </if>
@@ -27,6 +27,8 @@
 		  		  <if test="zzsj != null and zzsj != ''"> and ZZSJ = #{zzsj} </if>
 		  		  <if test="aqjx != null and aqjx != ''"> and AQJX = #{aqjx} </if>
 		  		  <if test="wcgz != null and wcgz != ''"> and WCGZ = #{wcgz} </if>
+		  		  <if test="other1 != null and other1 != ''"> and OTHER1 = #{other1} </if>
+		  		  <if test="other2 != null and other2 != ''"> and OTHER2 = #{other2} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -58,6 +60,8 @@
 		  		  <if test="zzsj != null and zzsj != ''"> and ZZSJ = #{zzsj} </if>
 		  		  <if test="aqjx != null and aqjx != ''"> and AQJX = #{aqjx} </if>
 		  		  <if test="wcgz != null and wcgz != ''"> and WCGZ = #{wcgz} </if>
+		  		  <if test="other1 != null and other1 != ''"> and OTHER1 = #{other1} </if>
+		  		  <if test="other2 != null and other2 != ''"> and OTHER2 = #{other2} </if>
 		  		</where>
 	</select>
 	 
@@ -82,7 +86,9 @@
 			YWJN, 
 			ZZSJ, 
 			AQJX, 
-			WCGZ
+			WCGZ,
+			OTHER1,
+			OTHER2
 		)
 		values
 		(
@@ -101,7 +107,9 @@
 			#{ywjn,jdbcType=VARCHAR}, 		
 			#{zzsj,jdbcType=VARCHAR}, 		
 			#{aqjx,jdbcType=VARCHAR}, 		
-			#{wcgz,jdbcType=VARCHAR}		
+			#{wcgz,jdbcType=VARCHAR},
+			#{other1,jdbcType=VARCHAR},
+			#{other2,jdbcType=VARCHAR}		
 		)
 	</insert>
 	 
@@ -122,7 +130,9 @@
 			<if test="ywjn != null"> YWJN  = #{ywjn}, </if>
 			<if test="zzsj != null"> ZZSJ  = #{zzsj}, </if>
 			<if test="aqjx != null"> AQJX  = #{aqjx}, </if>
-			<if test="wcgz != null"> WCGZ  = #{wcgz}</if>
+			<if test="wcgz != null"> WCGZ  = #{wcgz},</if>
+			<if test="other1 != null"> OTHER1 = #{other1}, </if>
+		  	<if test="other2 != null"> OTHER2 = #{other2} </if>
 		</set>
 		where ID = #{id}
 	</update>
@@ -141,7 +151,9 @@
 			<if test="ywjn != null"> YWJN  = #{ywjn}, </if>
 			<if test="zzsj != null"> ZZSJ  = #{zzsj}, </if>
 			<if test="aqjx != null"> AQJX  = #{aqjx}, </if>
-			<if test="wcgz != null"> WCGZ  = #{wcgz}</if>
+			<if test="wcgz != null"> WCGZ  = #{wcgz},</if>
+			<if test="other1 != null"> OTHER1 = #{other1}, </if>
+		  	<if test="other2 != null"> OTHER2 = #{other2} </if>
 		</set>
 		where sfzh = #{sfzh} and khzq=#{khzq} and DEPT_ID=#{deptId}
 	</update>

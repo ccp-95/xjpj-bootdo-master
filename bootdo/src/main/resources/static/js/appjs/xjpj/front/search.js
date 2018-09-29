@@ -60,7 +60,8 @@ function load() {
 						columns : [
 								{
 									field : 'id',
-									title : '序号'
+									title : '序号',
+									visible:false
 								},
 								{
 									field : 'khzq',
@@ -78,7 +79,8 @@ function load() {
 								},
 								{
 									field : 'nl',
-									title : '年龄'
+									title : '年龄',
+									visible:false
 								},
 								{
 									field : 'xb',
@@ -88,7 +90,8 @@ function load() {
 											return '男';
 										else
 											return '女';
-									}
+									},
+									visible:false
 								},
 								{
 									field : 'cheJian',
@@ -105,7 +108,8 @@ function load() {
 								},
 								{
 									field : 'sfzh',
-									title : '身份证号'									
+									title : '身份证号',
+									visible:false									
 								},
 								{
 									field : 'xingJi',
@@ -127,24 +131,32 @@ function load() {
 								},
 								{
 									field : 'zhdf',
-									title : '综合得分'
+									title : '综合<br>得分'
 								},
 								{
 									field : 'ywjn',
-									title : '业务技能'
+									title : '业务<br>技能'
 								},
 								{
 									field : 'zzsj',
-									title : '遵章守纪'
+									title : '遵章<br>守纪'
 								},
 								{
 									field : 'aqjx',
-									title : '安全绩效'
+									title : '安全<br>绩效'
 								},
 								{
 									field : 'wcgz',
-									title : '完成工作'
-								} ]
+									title : '完成<br>工作'
+								},
+								{
+									field : 'other1',
+									title : '其它一'
+								},
+								{
+									field : 'other2',
+									title : '其它二'
+								}]
 					});
 }
 function reLoad() {

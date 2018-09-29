@@ -52,6 +52,22 @@ comment on column XJPJ_PINGDINGXINXI.WCGZ
 alter table XJPJ_PINGDINGXINXI
   add constraint PK_XJPJ_PDXX_ID primary key (ID);
 
+  -- Alter table 
+alter table XJPJ_PINGDINGXINXI
+  storage
+  (
+    next 8
+  )
+;
+-- Add/modify columns 
+alter table XJPJ_PINGDINGXINXI add OTHER1 VARCHAR2(50);
+alter table XJPJ_PINGDINGXINXI add OTHER2 VARCHAR2(50);
+-- Add comments to the columns 
+comment on column XJPJ_PINGDINGXINXI.OTHER1
+  is '其它1';
+comment on column XJPJ_PINGDINGXINXI.OTHER2
+  is '其它2';
+
 -- Create sequence 
 create sequence SEQ_XJPJ_PINGDINGXINXI
 start with 100
@@ -138,4 +154,6 @@ create sequence SEQ_XJPJ_WHITELIST
 minvalue 100
 start with 100
 nocache;
+
+
 

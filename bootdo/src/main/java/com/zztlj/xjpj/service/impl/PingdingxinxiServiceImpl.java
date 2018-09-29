@@ -68,10 +68,12 @@ public class PingdingxinxiServiceImpl implements PingdingxinxiService {
 		map.put("deptId", pingdingxinxi.getDeptId());
 		int count = pingdingxinxiDao.count(map);
 		if (count == 0) {
-			return pingdingxinxiDao.save(pingdingxinxi);
+			pingdingxinxiDao.save(pingdingxinxi);
+			return 1;
 		}
 		else if (count == 1) {
-			return pingdingxinxiDao.updateWithSfzh(pingdingxinxi);
+			pingdingxinxiDao.updateWithSfzh(pingdingxinxi);
+			return 2;
 		}
 		return 0;
 	}

@@ -60,7 +60,8 @@ function load() {
 								},
 								{
 									field : 'id',
-									title : '序号'
+									title : '序号',
+									visible:false
 								},
 								{
 									field : 'khzq',
@@ -68,8 +69,7 @@ function load() {
 								},
 								{
 									field : 'deptName',
-									title : '单位',
-									width : '8%'
+									title : '单位'
 								},
 								{
 									field : 'zgxm',
@@ -99,8 +99,7 @@ function load() {
 								},
 								{
 									field : 'gangWei',
-									title : '岗位',
-									width : '8%'
+									title : '岗位'
 								},
 								{
 									field : 'sfzh',
@@ -109,7 +108,6 @@ function load() {
 								{
 									field : 'xingJi',
 									title : '星级',
-									width : '10%',
 									formatter : function(value, row, index) {
 										if (value == '0') {
 											return '失格';
@@ -126,27 +124,35 @@ function load() {
 								},
 								{
 									field : 'zhdf',
-									title : '综合得分'
+									title : '综合<br>得分'
 								},
 								{
 									field : 'ywjn',
-									title : '业务技能'
+									title : '业务<br>技能'
 								},
 								{
 									field : 'zzsj',
-									title : '遵章守纪'
+									title : '遵章<br>守纪'
 								},
 								{
 									field : 'aqjx',
-									title : '安全绩效'
+									title : '安全<br>绩效'
 								},
 								{
 									field : 'wcgz',
-									title : '完成工作'
+									title : '完成<br>工作'
+								},
+								{
+									field : 'other1',
+									title : '其它一'
+								},
+								{
+									field : 'other2',
+									title : '其它二'
 								},
 								{
 									title : '操作',
-									field : 'id',
+									field : 'cz',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '
