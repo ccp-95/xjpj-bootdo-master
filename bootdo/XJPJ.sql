@@ -64,9 +64,9 @@ alter table XJPJ_PINGDINGXINXI add OTHER1 VARCHAR2(50);
 alter table XJPJ_PINGDINGXINXI add OTHER2 VARCHAR2(50);
 -- Add comments to the columns 
 comment on column XJPJ_PINGDINGXINXI.OTHER1
-  is '其它1';
+  is '其它一';
 comment on column XJPJ_PINGDINGXINXI.OTHER2
-  is '其它2';
+  is '其它二';
 
 -- Create sequence 
 create sequence SEQ_XJPJ_PINGDINGXINXI
@@ -156,4 +156,42 @@ start with 100
 nocache;
 
 
+-- Create table
+create table XJPJ_API_KEY
+(
+  ID     number not null,
+  APPID  varchar2(50),
+  APPKEY varchar2(100)
+)
+;
+-- Add comments to the table 
+comment on table XJPJ_API_KEY
+  is 'API访问密钥';
+-- Add comments to the columns 
+comment on column XJPJ_API_KEY.ID
+  is '序号';
+comment on column XJPJ_API_KEY.APPID
+  is 'App标识';
+comment on column XJPJ_API_KEY.APPKEY
+  is 'App密钥';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table XJPJ_API_KEY
+  add constraint PK_API_KEY_ID primary key (ID);
 
+  -- Create/Recreate primary, unique and foreign key constraints 
+alter table XJPJ_API_KEY
+  add constraint UNQ_API_KEY_APPID unique (APPID);
+
+  -- Add/modify columns 
+alter table XJPJ_API_KEY modify APPID not null;
+alter table XJPJ_API_KEY modify APPKEY not null;
+alter table XJPJ_API_KEY add DEPT_ID number not null;
+-- Add comments to the columns 
+comment on column XJPJ_API_KEY.DEPT_ID
+  is '单位ID';
+
+  -- Create sequence 
+create sequence SEQ_XJPJ_API_KEY
+minvalue 100
+start with 100
+nocache;

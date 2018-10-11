@@ -309,7 +309,6 @@ public class PingdingxinxiDO implements Serializable {
 		return wcgz;
 	}
 	
-
 	public String getOther1() {
 		return other1;
 	}

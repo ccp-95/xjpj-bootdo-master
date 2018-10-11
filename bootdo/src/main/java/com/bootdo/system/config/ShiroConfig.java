@@ -95,6 +95,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/system/sysDept/treeView", "anon");
         filterChainDefinitionMap.put("/common/attatchment/listAttatchment/**", "anon");
         filterChainDefinitionMap.put("/common/sysFile/download/**", "anon");
+        filterChainDefinitionMap.put("/api/xjpj/import", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

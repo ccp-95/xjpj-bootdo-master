@@ -91,15 +91,15 @@ function load() {
 								},
 								{
 									field : 'cheJian',
-									title : '车间'
+									title : '所在<br>车间'
 								},
 								{
 									field : 'banZu',
-									title : '班组'
+									title : '所在<br>班组'
 								},
 								{
 									field : 'gangWei',
-									title : '岗位'
+									title : '岗位<br>名称'
 								},
 								{
 									field : 'sfzh',

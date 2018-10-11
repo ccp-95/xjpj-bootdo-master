@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zztlj.xjpj.dao.ApiKeyDao">
+
+	<select id="get" resultType="com.zztlj.xjpj.domain.ApiKeyDO">
+		select ID,APPID,APPKEY,DEPT_ID from XJPJ_API_KEY where ID = #{value}
+	</select>
+	
+	<select id="getByAppID" resultType="com.zztlj.xjpj.domain.ApiKeyDO">
+		select ID,APPID,APPKEY,DEPT_ID from XJPJ_API_KEY where APPID = #{value}
+	</select>
+
+	<select id="list" resultType="com.zztlj.xjpj.domain.ApiKeyDO">
+	    <include refid="pagination.Oracle_Pagination_Head" />
+		select ID,APPID,APPKEY,DEPT_ID from XJPJ_API_KEY
+        <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="appid != null and appid != ''"> and APPID = #{appid} </if>
+		  		  <if test="appkey != null and appkey != ''"> and APPKEY = #{appkey} </if>
+		  		  <if test="deptId != null and deptId != ''"> and DEPT_ID = #{deptId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by ID desc
+			</otherwise>
+        </choose>
+		<include refid="pagination.Oracle_Pagination_Tail" />
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from XJPJ_API_KEY
+		 <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="appid != null and appid != ''"> and APPID = #{appid} </if>
+		  		  <if test="appkey != null and appkey != ''"> and APPKEY = #{appkey} </if>
+		  		  <if test="deptId != null and deptId != ''"> and DEPT_ID = #{deptId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.zztlj.xjpj.domain.ApiKeyDO">
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">  
+			SELECT SEQ_XJPJ_API_KEY.NEXTVAL FROM DUAL   
+		</selectKey>  
+		insert into XJPJ_API_KEY
+		(
+			ID, 
+			APPID, 
+			APPKEY, 
+			DEPT_ID
+		)
+		values
+		(
+			#{id,jdbcType=NUMERIC}, 		
+			#{appid,jdbcType=VARCHAR}, 		
+			#{appkey,jdbcType=VARCHAR}, 		
+			#{deptId,jdbcType=NUMERIC}		
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.zztlj.xjpj.domain.ApiKeyDO">
+		update XJPJ_API_KEY 
+		<set>
+			<if test="appid != null"> APPID  = #{appid}, </if>
+			<if test="appkey != null"> APPKEY  = #{appkey}, </if>
+			<if test="deptId != null"> DEPT_ID  = #{deptId}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from XJPJ_API_KEY where ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from XJPJ_API_KEY where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
